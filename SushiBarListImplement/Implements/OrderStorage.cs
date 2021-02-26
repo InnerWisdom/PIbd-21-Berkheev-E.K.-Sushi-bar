@@ -102,7 +102,6 @@ namespace SushiBarListImplement.Implements
         private Order CreateModel(OrderBindingModel model, Order order)
         {
             order.SushiId = model.SushiId;
-            order.SushiName = model.SushiName;
             order.Count= model.Count;
             order.Sum= model.Sum;
             order.Status= model.Status;
@@ -118,7 +117,6 @@ namespace SushiBarListImplement.Implements
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
-                SushiName = order.SushiName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
