@@ -13,7 +13,7 @@ namespace SushiBarBusinessLogic.ViewModels
 
         public int SushiId { get; set; }
 
-        [DisplayName("Изделие")]
+        [DisplayName("Суши")]
         public string SushiName { get; set; }
 
         [DisplayName("Количество")]
