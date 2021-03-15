@@ -16,8 +16,7 @@ namespace SushiBarView
         private readonly SushiLogic logic;
 
         private int? id;
-
-        private Dictionary<int, (string, int)> sushiIngredients;
+        private Dictionary<int, (string, int)> sushiComponents;
         public FormSushi(SushiLogic service)
         {
             InitializeComponent();
