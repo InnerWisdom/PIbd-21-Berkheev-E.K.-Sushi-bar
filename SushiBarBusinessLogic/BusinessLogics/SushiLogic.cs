@@ -55,7 +55,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             });
             if (element == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Ингредиент не найден");
             }
             _sushiStorage.Delete(model);
         }
