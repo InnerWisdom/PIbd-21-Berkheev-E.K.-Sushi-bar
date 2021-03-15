@@ -18,9 +18,9 @@ namespace SushiBarListImplement.Implements
         public List<SushiViewModel> GetFullList()
         {
             List<SushiViewModel> result = new List<SushiViewModel>();
-            foreach (var component in source.Sushis)
+            foreach (var ingredient in source.Sushis)
             {
-                result.Add(CreateModel(component));
+                result.Add(CreateModel(ingredient));
             }
             return result;
         }
@@ -132,7 +132,7 @@ namespace SushiBarListImplement.Implements
         private SushiViewModel CreateModel(Sushi sushi)
         {
             // требуется дополнительно получить список компонентов для изделия с названиями и их количество
-        Dictionary<int, (string, int)> sushiComponents = new
+        Dictionary<int, (string, int)> sushiIngredients = new
         Dictionary<int, (string, int)>();
             foreach (var pc in sushi.SushiIngredients)
             {
@@ -145,14 +145,14 @@ namespace SushiBarListImplement.Implements
                         break;
                     }
                 }
-                sushiComponents.Add(pc.Key, (ingredientName, pc.Value));
+                sushiIngredients.Add(pc.Key, (ingredientName, pc.Value));
             }
             return new SushiViewModel
             {
                 Id = sushi.Id,
                 SushiName = sushi.SushiName,
                 Price = sushi.Price,
-                SushiComponents = sushiComponents
+                SushiIngredients = sushiIngredients
             };
         }
     }

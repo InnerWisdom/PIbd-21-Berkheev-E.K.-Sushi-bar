@@ -9,27 +9,27 @@ namespace SushiBarBusinessLogic.BusinessLogics
 {
     public class SushiLogic
     {
-        private readonly ISushiStorage _productStorage;
-        public SushiLogic(ISushiStorage productStorage)
+        private readonly ISushiStorage _sushiStorage;
+        public SushiLogic(ISushiStorage sushiStorage)
         {
-            _productStorage = productStorage;
+            _sushiStorage = sushiStorage;
         }
         public List<SushiViewModel> Read(SushiBindingModel model)
         {
             if (model == null)
             {
-                return _productStorage.GetFullList();
+                return _sushiStorage.GetFullList();
             }
             if (model.Id.HasValue)
             {
-                return new List<SushiViewModel> { _productStorage.GetElement(model)
+                return new List<SushiViewModel> { _sushiStorage.GetElement(model)
 };
             }
-            return _productStorage.GetFilteredList(model);
+            return _sushiStorage.GetFilteredList(model);
         }
         public void CreateOrUpdate(SushiBindingModel model)
         {
-            var element = _productStorage.GetElement(new SushiBindingModel
+            var element = _sushiStorage.GetElement(new SushiBindingModel
             {
                 SushiName = model.SushiName
             });
@@ -39,16 +39,16 @@ namespace SushiBarBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                _productStorage.Update(model);
+                _sushiStorage.Update(model);
             }
             else
             {
-                _productStorage.Insert(model);
+                _sushiStorage.Insert(model);
             }
         }
         public void Delete(SushiBindingModel model)
         {
-            var element = _productStorage.GetElement(new SushiBindingModel
+            var element = _sushiStorage.GetElement(new SushiBindingModel
             {
                 Id =
            model.Id
@@ -57,7 +57,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 throw new Exception("Элемент не найден");
             }
-            _productStorage.Delete(model);
+            _sushiStorage.Delete(model);
         }
     }
 }

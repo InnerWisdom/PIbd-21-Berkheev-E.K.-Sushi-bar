@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxProduct = new System.Windows.Forms.ComboBox();
+            this.comboBoxSushi = new System.Windows.Forms.ComboBox();
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.textBoxSum = new System.Windows.Forms.TextBox();
             this.ButtonSave = new System.Windows.Forms.Button();
@@ -65,14 +65,14 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Сумма";
             // 
-            // comboBoxProduct
+            // comboBoxSushi
             // 
-            this.comboBoxProduct.FormattingEnabled = true;
-            this.comboBoxProduct.Location = new System.Drawing.Point(111, 26);
-            this.comboBoxProduct.Name = "comboBoxProduct";
-            this.comboBoxProduct.Size = new System.Drawing.Size(227, 21);
-            this.comboBoxProduct.TabIndex = 3;
-            this.comboBoxProduct.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProduct_SelectedIndexChanged);
+            this.comboBoxSushi.FormattingEnabled = true;
+            this.comboBoxSushi.Location = new System.Drawing.Point(111, 26);
+            this.comboBoxSushi.Name = "comboBoxSushi";
+            this.comboBoxSushi.Size = new System.Drawing.Size(227, 21);
+            this.comboBoxSushi.TabIndex = 3;
+            this.comboBoxSushi.SelectedIndexChanged += new System.EventHandler(this.ComboBoxProduct_SelectedIndexChanged);
             // 
             // textBoxCount
             // 
@@ -118,7 +118,7 @@
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.textBoxSum);
             this.Controls.Add(this.textBoxCount);
-            this.Controls.Add(this.comboBoxProduct);
+            this.Controls.Add(this.comboBoxSushi);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -135,7 +135,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxProduct;
+        private System.Windows.Forms.ComboBox comboBoxSushi;
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.TextBox textBoxSum;
         private System.Windows.Forms.Button ButtonSave;

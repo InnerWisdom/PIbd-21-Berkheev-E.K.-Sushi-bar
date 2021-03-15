@@ -29,10 +29,10 @@ namespace SushiBarView
                 List<SushiViewModel> list = _logicP.Read(null);
                 if (list != null)
                 {
-                    comboBoxProduct.DisplayMember = "SushiName";
-                    comboBoxProduct.ValueMember = "Id";
-                    comboBoxProduct.DataSource = list;
-                    comboBoxProduct.SelectedItem = null;
+                    comboBoxSushi.DisplayMember = "SushiName";
+                    comboBoxSushi.ValueMember = "Id";
+                    comboBoxSushi.DataSource = list;
+                    comboBoxSushi.SelectedItem = null;
                 }
             }
                 catch (Exception ex)
@@ -45,12 +45,12 @@ namespace SushiBarView
         }
         private void CalcSum()
         {
-            if (comboBoxProduct.SelectedValue != null &&
+            if (comboBoxSushi.SelectedValue != null &&
            !string.IsNullOrEmpty(textBoxCount.Text))
             {
                 try
                 {
-                    int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
+                    int id = Convert.ToInt32(comboBoxSushi.SelectedValue);
                     SushiViewModel product = _logicP.Read(new SushiBindingModel
                     {
                         Id
@@ -82,7 +82,7 @@ namespace SushiBarView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxProduct.SelectedValue == null)
+            if (comboBoxSushi.SelectedValue == null)
             {
                 MessageBox.Show("Выберите суши", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -92,7 +92,7 @@ namespace SushiBarView
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
-                    SushiId = Convert.ToInt32(comboBoxProduct.SelectedValue),
+                    SushiId = Convert.ToInt32(comboBoxSushi.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
                     Status=0
