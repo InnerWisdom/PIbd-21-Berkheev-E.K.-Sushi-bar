@@ -13,13 +13,11 @@ namespace SushiBarView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
-        private readonly SushiLogic _SushiLogic;
 
-        public FormMain(OrderLogic orderLogic, SushiLogic _pLogic)
+        public FormMain(OrderLogic orderLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
-            this._SushiLogic = _pLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
