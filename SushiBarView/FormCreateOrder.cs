@@ -93,7 +93,6 @@ namespace SushiBarView
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
                     SushiId = Convert.ToInt32(comboBoxProduct.SelectedValue),
-                    SushiName=comboBoxProduct.Text,
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
                     Status=0

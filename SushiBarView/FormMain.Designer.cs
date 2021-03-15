@@ -33,15 +33,14 @@
             this.toolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.КомпонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ИзделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.кухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonTakeOrderInWork = new System.Windows.Forms.Button();
             this.ButtonOrderReady = new System.Windows.Forms.Button();
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.кухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.заполнениеКухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButtonFillKitchen = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +49,7 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
-            this.toolStripButton1});
+            this.toolStripButtonFillKitchen});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -63,8 +62,7 @@
             this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.КомпонентыToolStripMenuItem,
             this.ИзделияToolStripMenuItem,
-            this.кухниToolStripMenuItem,
-            this.заполнениеКухниToolStripMenuItem});
+            this.кухниToolStripMenuItem});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
             this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton.Name = "toolStripDropDownButton";
@@ -85,11 +83,18 @@
             this.ИзделияToolStripMenuItem.Text = "Суши";
             this.ИзделияToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
+            // кухниToolStripMenuItem
+            // 
+            this.кухниToolStripMenuItem.Name = "кухниToolStripMenuItem";
+            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кухниToolStripMenuItem.Text = "Кухни";
+            this.кухниToolStripMenuItem.Click += new System.EventHandler(this.кухниToolStripMenuItem_Click);
+            // 
             // DataGridView
             // 
             this.DataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView.Location = new System.Drawing.Point(1, 32);
+            this.DataGridView.Location = new System.Drawing.Point(1, 28);
             this.DataGridView.MultiSelect = false;
             this.DataGridView.Name = "DataGridView";
             this.DataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -146,28 +151,16 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // кухниToolStripMenuItem
+            // toolStripButtonFillKitchen
             // 
-            this.кухниToolStripMenuItem.Name = "кухниToolStripMenuItem";
-            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.кухниToolStripMenuItem.Text = "Кухни";
-            this.кухниToolStripMenuItem.Click += new System.EventHandler(this.кухниToolStripMenuItem_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
-            // заполнениеКухниToolStripMenuItem
-            // 
-            this.заполнениеКухниToolStripMenuItem.Name = "заполнениеКухниToolStripMenuItem";
-            this.заполнениеКухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.заполнениеКухниToolStripMenuItem.Text = "Заполнение кухни";
-            this.заполнениеКухниToolStripMenuItem.Click += new System.EventHandler(this.заполнениеКухниToolStripMenuItem_Click);
+            this.toolStripButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonFillKitchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFillKitchen.Image")));
+            this.toolStripButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFillKitchen.Name = "toolStripButtonFillKitchen";
+            this.toolStripButtonFillKitchen.Size = new System.Drawing.Size(113, 22);
+            this.toolStripButtonFillKitchen.Text = "Заполнение кухни";
+            this.toolStripButtonFillKitchen.ToolTipText = "toolStripButtonFillKitchen";
+            this.toolStripButtonFillKitchen.Click += new System.EventHandler(this.toolStripButtonFillKitchen_Click);
             // 
             // FormMain
             // 
@@ -205,7 +198,6 @@
         private System.Windows.Forms.Button ButtonPayOrder;
         private System.Windows.Forms.Button ButtonRef;
         private System.Windows.Forms.ToolStripMenuItem кухниToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem заполнениеКухниToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonFillKitchen;
     }
 }
