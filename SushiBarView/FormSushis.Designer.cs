@@ -90,7 +90,7 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // FormComponents
+            // FormSushis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,8 +100,8 @@
             this.Controls.Add(this.ButtonUpd);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormComponents";
-            this.Text = "Ингредиенты";
+            this.Name = "FormSushis";
+            this.Text = "Суши";
             this.Load += new System.EventHandler(this.FormComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

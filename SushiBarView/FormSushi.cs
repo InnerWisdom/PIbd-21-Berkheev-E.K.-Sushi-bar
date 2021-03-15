@@ -12,7 +12,9 @@ namespace SushiBarView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
+
         private readonly SushiLogic logic;
+
         private int? id;
         private Dictionary<int, (string, int)> sushiIngredients;
         public FormSushi(SushiLogic service)
