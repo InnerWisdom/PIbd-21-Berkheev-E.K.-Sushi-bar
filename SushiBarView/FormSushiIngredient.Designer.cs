@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBoxComponent = new System.Windows.Forms.ComboBox();
+            this.comboBoxIngredient = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.ButtonSave = new System.Windows.Forms.Button();
@@ -36,22 +36,22 @@
             this.textBoxCount = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // comboBoxComponent
+            // comboBoxIngredient
             // 
-            this.comboBoxComponent.FormattingEnabled = true;
-            this.comboBoxComponent.Location = new System.Drawing.Point(126, 18);
-            this.comboBoxComponent.Name = "comboBoxComponent";
-            this.comboBoxComponent.Size = new System.Drawing.Size(204, 21);
-            this.comboBoxComponent.TabIndex = 0;
+            this.comboBoxIngredient.FormattingEnabled = true;
+            this.comboBoxIngredient.Location = new System.Drawing.Point(126, 18);
+            this.comboBoxIngredient.Name = "comboBoxIngredient";
+            this.comboBoxIngredient.Size = new System.Drawing.Size(204, 21);
+            this.comboBoxIngredient.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(32, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Компонент";
+            this.label1.Text = "Ингредиент";
             // 
             // label2
             // 
@@ -89,7 +89,7 @@
             this.textBoxCount.Size = new System.Drawing.Size(204, 20);
             this.textBoxCount.TabIndex = 5;
             // 
-            // FormProductComponent
+            // FormSushiIngredient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -99,8 +99,8 @@
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBoxComponent);
-            this.Name = "FormProductComponent";
+            this.Controls.Add(this.comboBoxIngredient);
+            this.Name = "FormSushiIngredient";
             this.Text = "Продукт";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -109,7 +109,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBoxComponent;
+        private System.Windows.Forms.ComboBox comboBoxIngredient;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button ButtonSave;
