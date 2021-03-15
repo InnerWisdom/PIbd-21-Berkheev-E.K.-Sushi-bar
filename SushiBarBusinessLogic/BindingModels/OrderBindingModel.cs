@@ -8,6 +8,7 @@ namespace SushiBarBusinessLogic.BindingModels
     public class OrderBindingModel
     {
         public int? Id { get; set; }
+
         public int SushiId { get; set; }
 
         public int Count { get; set; }
