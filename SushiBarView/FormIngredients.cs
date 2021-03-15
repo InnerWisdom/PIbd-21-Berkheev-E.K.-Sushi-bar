@@ -16,7 +16,7 @@ namespace SushiBarView
             InitializeComponent();
             this.logic = logic;
         }
-        private void FormComponents_Load(object sender, EventArgs e)
+        private void FormIngredients_Load(object sender, EventArgs e)
         {
             LoadData();
         }

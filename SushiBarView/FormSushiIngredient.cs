@@ -13,10 +13,10 @@ namespace SushiBarView
         public new IUnityContainer Container { get; set; }
         public int Id
         {
-            get { return Convert.ToInt32(comboBoxComponent.SelectedValue); }
-            set { comboBoxComponent.SelectedValue = value; }
+            get { return Convert.ToInt32(comboBoxIngredient.SelectedValue); }
+            set { comboBoxIngredient.SelectedValue = value; }
         }
-        public string IngredientName { get { return comboBoxComponent.Text; } }
+        public string IngredientName { get { return comboBoxIngredient.Text; } }
         public int Count
         {
             get { return Convert.ToInt32(textBoxCount.Text); }
@@ -31,10 +31,10 @@ namespace SushiBarView
             List<IngredientViewModel> list = logic.Read(null);
             if (list != null)
             {
-                comboBoxComponent.DisplayMember = "IngredientName";
-                comboBoxComponent.ValueMember = "Id";
-                comboBoxComponent.DataSource = list;
-                comboBoxComponent.SelectedItem = null;
+                comboBoxIngredient.DisplayMember = "IngredientName";
+                comboBoxIngredient.ValueMember = "Id";
+                comboBoxIngredient.DataSource = list;
+                comboBoxIngredient.SelectedItem = null;
             }
         }
         private void ButtonSave_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace SushiBarView
                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBoxComponent.SelectedValue == null)
+            if (comboBoxIngredient.SelectedValue == null)
             {
                 MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);

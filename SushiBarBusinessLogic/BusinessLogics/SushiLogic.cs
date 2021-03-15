@@ -35,7 +35,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("Уже есть компонент с таким названием");
+                throw new Exception("Уже есть ингредиент с таким названием");
             }
             if (model.Id.HasValue)
             {
@@ -55,7 +55,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             });
             if (element == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Ингредиент не найден");
             }
             _sushiStorage.Delete(model);
         }
