@@ -202,7 +202,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FormSushi";
             this.Text = "Суши";
-            this.Load += new System.EventHandler(this.FormProduct_Load);
+            this.Load += new System.EventHandler(this.FormSushi_Load);
             this.groupBoxComponents.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);

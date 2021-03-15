@@ -9,55 +9,55 @@ namespace SushiBarBusinessLogic.BusinessLogics
 {
     public class SushiLogic
     {
-        private readonly ISushiStorage _productStorage;
-        public SushiLogic(ISushiStorage productStorage)
+        private readonly ISushiStorage _sushiStorage;
+        public SushiLogic(ISushiStorage sushiStorage)
         {
-            _productStorage = productStorage;
+            _sushiStorage = sushiStorage;
         }
         public List<SushiViewModel> Read(SushiBindingModel model)
         {
             if (model == null)
             {
-                return _productStorage.GetFullList();
+                return _sushiStorage.GetFullList();
             }
             if (model.Id.HasValue)
             {
-                return new List<SushiViewModel> { _productStorage.GetElement(model)
+                return new List<SushiViewModel> { _sushiStorage.GetElement(model)
 };
             }
-            return _productStorage.GetFilteredList(model);
+            return _sushiStorage.GetFilteredList(model);
         }
         public void CreateOrUpdate(SushiBindingModel model)
         {
-            var element = _productStorage.GetElement(new SushiBindingModel
+            var element = _sushiStorage.GetElement(new SushiBindingModel
             {
                 SushiName = model.SushiName
             });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("Уже есть компонент с таким названием");
+                throw new Exception("Уже есть ингредиент с таким названием");
             }
             if (model.Id.HasValue)
             {
-                _productStorage.Update(model);
+                _sushiStorage.Update(model);
             }
             else
             {
-                _productStorage.Insert(model);
+                _sushiStorage.Insert(model);
             }
         }
         public void Delete(SushiBindingModel model)
         {
-            var element = _productStorage.GetElement(new SushiBindingModel
+            var element = _sushiStorage.GetElement(new SushiBindingModel
             {
                 Id =
            model.Id
             });
             if (element == null)
             {
-                throw new Exception("Элемент не найден");
+                throw new Exception("Ингредиент не найден");
             }
-            _productStorage.Delete(model);
+            _sushiStorage.Delete(model);
         }
     }
 }

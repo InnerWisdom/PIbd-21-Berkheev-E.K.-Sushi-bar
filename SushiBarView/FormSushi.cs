@@ -20,7 +20,7 @@ namespace SushiBarView
             InitializeComponent();
             this.logic = service;
         }
-        private void FormProduct_Load(object sender, EventArgs e)
+        private void FormSushi_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
             {
