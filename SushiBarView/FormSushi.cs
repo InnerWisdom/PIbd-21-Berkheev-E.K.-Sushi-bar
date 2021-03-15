@@ -14,7 +14,7 @@ namespace SushiBarView
         public int Id { set { id = value; } }
         private readonly SushiLogic logic;
         private int? id;
-        private Dictionary<int, (string, int)> sushiComponents;
+        private Dictionary<int, (string, int)> sushiIngredients;
         public FormSushi(SushiLogic service)
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace SushiBarView
                     {
                         textBoxName.Text = view.SushiName;
                         textBoxPrice.Text = view.Price.ToString();
-                        sushiComponents = view.SushiComponents;
+                        sushiIngredients = view.SushiIngredients;
                         LoadData();
                     }
                 }
@@ -46,7 +46,7 @@ namespace SushiBarView
             }
             else
             {
-                sushiComponents = new Dictionary<int, (string, int)>();
+                sushiIngredients = new Dictionary<int, (string, int)>();
             }
         }
 
@@ -54,10 +54,10 @@ namespace SushiBarView
         {
             try
             {
-                if (sushiComponents != null)
+                if (sushiIngredients != null)
                 {
                     DataGridView.Rows.Clear();
-                    foreach (var pc in sushiComponents)
+                    foreach (var pc in sushiIngredients)
                     {
                         DataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1,
 pc.Value.Item2 });
@@ -75,13 +75,13 @@ pc.Value.Item2 });
             var form = Container.Resolve<FormSushiIngredient>();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                if (sushiComponents.ContainsKey(form.Id))
+                if (sushiIngredients.ContainsKey(form.Id))
                 {
-                    sushiComponents[form.Id] = (form.IngredientName, form.Count);
+                    sushiIngredients[form.Id] = (form.IngredientName, form.Count);
                 }
                 else
                 {
-                    sushiComponents.Add(form.Id, (form.IngredientName, form.Count));
+                    sushiIngredients.Add(form.Id, (form.IngredientName, form.Count));
                 }
                 LoadData();
             }
@@ -93,10 +93,10 @@ pc.Value.Item2 });
                 var form = Container.Resolve<FormSushiIngredient>();
                 int id = Convert.ToInt32(DataGridView.SelectedRows[0].Cells[0].Value);
                 form.Id = id;
-                form.Count = sushiComponents[id].Item2;
+                form.Count = sushiIngredients[id].Item2;
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    sushiComponents[form.Id] = (form.IngredientName, form.Count);
+                    sushiIngredients[form.Id] = (form.IngredientName, form.Count);
                     LoadData();
                 }
             }
@@ -111,7 +111,7 @@ pc.Value.Item2 });
                     try
                     {
 
-                        sushiComponents.Remove(Convert.ToInt32(DataGridView.SelectedRows[0].Cells[0].Value));
+                        sushiIngredients.Remove(Convert.ToInt32(DataGridView.SelectedRows[0].Cells[0].Value));
                     }
                     catch (Exception ex)
                     {
@@ -140,7 +140,7 @@ pc.Value.Item2 });
                MessageBoxIcon.Error);
                 return;
             }
-            if (sushiComponents == null || sushiComponents.Count == 0)
+            if (sushiIngredients == null || sushiIngredients.Count == 0)
             {
                 MessageBox.Show("Заполните ингредиенты", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
@@ -153,7 +153,7 @@ pc.Value.Item2 });
                     Id = id,
                     SushiName = textBoxName.Text,
                     Price = Convert.ToDecimal(textBoxPrice.Text),
-                    SushiIngredients = sushiComponents
+                    SushiIngredients = sushiIngredients
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);

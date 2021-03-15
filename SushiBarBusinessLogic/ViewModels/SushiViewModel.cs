@@ -14,6 +14,6 @@ namespace SushiBarBusinessLogic.ViewModels
         [DisplayName("Цена")]
         public decimal Price { get; set; }
 
-        public Dictionary<int, (string, int)> SushiComponents { get; set; }
+        public Dictionary<int, (string, int)> SushiIngredients { get; set; }
     }
 }
