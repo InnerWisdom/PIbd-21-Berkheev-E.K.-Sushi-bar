@@ -33,7 +33,6 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 SushiId = model.SushiId,
                 Count = model.Count,
                 Sum = model.Sum,
-                SushiName = model.SushiName,
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят,
                 DateImplement=DateTime.Now
@@ -58,7 +57,6 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
-                SushiName=order.SushiName,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
@@ -86,7 +84,6 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 Id = order.Id,
                 SushiId = order.SushiId,
                 Count = order.Count,
-                SushiName = order.SushiName,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
@@ -115,7 +112,6 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
-                SushiName=order.SushiName,
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
