@@ -174,5 +174,9 @@ namespace SushiBarListImplement.Implements
                 }
             }
         }
+        public bool TakeFromKitchen(Dictionary<int, (string, int)> ingredients, int sushiCount)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

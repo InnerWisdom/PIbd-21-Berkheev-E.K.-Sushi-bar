@@ -15,6 +15,7 @@ namespace SushiBarListImplement
 
         public List<Kitchen> Kitchens { get; set; }
 
+
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
