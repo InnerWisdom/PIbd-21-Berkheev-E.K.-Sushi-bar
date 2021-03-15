@@ -148,10 +148,6 @@
       <Project>{aba3a75c-3bb5-4142-8653-194095a062d3}</Project>
       <Name>SushiBarBusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SushiBarFileImplement\SushiBarFileImplement.csproj">
-      <Project>{ee15eed5-eaaa-417c-938a-19d567607ba3}</Project>
-      <Name>SushiBarFileImplement</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SushiBarListImplement\SushiBarListImplement.csproj">
       <Project>{a77d0882-4a91-43fb-a991-d76168bf0b5c}</Project>
       <Name>SushiBarListImplement</Name>
