@@ -55,6 +55,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFillKitchen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFillKitchen.Designer.cs">
+      <DependentUpon>FormFillKitchen.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIngredient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +78,18 @@
     </Compile>
     <Compile Include="FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKitchen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKitchen.Designer.cs">
+      <DependentUpon>FormKitchen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKitchens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKitchens.Designer.cs">
+      <DependentUpon>FormKitchens.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -99,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFillKitchen.resx">
+      <DependentUpon>FormFillKitchen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormIngredient.resx">
       <DependentUpon>FormIngredient.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKitchen.resx">
+      <DependentUpon>FormKitchen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKitchens.resx">
+      <DependentUpon>FormKitchens.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
