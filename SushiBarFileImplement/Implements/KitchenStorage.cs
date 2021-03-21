@@ -136,44 +136,50 @@ namespace SushiBarFileImplement.Implements
             }
         }
 
-        public bool TakeFromKitchen(Dictionary<int, (string, int)> materials, int reinforcedCount)
+        public void CheckAndWriteOff(SushiViewModel model, int printedProductCountInOrder)
         {
-            foreach (var kitchenIngredient in materials)
+            foreach (var ingredientInSushi in model.SushiIngredients)
             {
-                int count = source.Kitchens.Where(material => material.KitchenIngredients.ContainsKey(kitchenIngredient.Key)).Sum(material => material.KitchenIngredients[kitchenIngredient.Key]);
+                int ingredientCount = source.Kitchens
+                        .Sum(kitchen => kitchen.KitchenIngredients
+                        .FirstOrDefault(ingredient => ingredient.Key == ingredientInSushi.Key).Value);
 
-                if (count < kitchenIngredient.Value.Item2 * reinforcedCount)
+                if (ingredientCount < ingredientInSushi.Value.Item2 * printedProductCountInOrder)
                 {
-                    return false;
+                    throw new Exception("Не хватает ингредиентов для суши!");
                 }
             }
 
-            foreach (var kitchenIngredient in materials)
+            foreach (var ingredientInSushi in model.SushiIngredients)
             {
-                int count = kitchenIngredient.Value.Item2 * reinforcedCount;
-                IEnumerable<Kitchen> kitchens = source.Kitchens.Where(material => material.KitchenIngredients.ContainsKey(kitchenIngredient.Key));
+                int ingredientCountInSushi = ingredientInSushi.Value.Item2 * printedProductCountInOrder;
 
-                foreach (Kitchen kitchen in kitchens)
+                List<Kitchen> certainKitchens = source.Kitchens
+                    .Where(kitchen => kitchen.KitchenIngredients
+                    .ContainsKey(ingredientInSushi.Key))
+                    .ToList();
+
+                foreach (var storehouse in certainKitchens)
                 {
-                    if (kitchen.KitchenIngredients[kitchenIngredient.Key] <= count)
+                    int ingredientCountInKitchen = storehouse.KitchenIngredients[ingredientInSushi.Key];
+
+                    if (ingredientCountInKitchen <= ingredientCountInSushi)
                     {
-                        count -= kitchen.KitchenIngredients[kitchenIngredient.Key];
-                        kitchen.KitchenIngredients.Remove(kitchenIngredient.Key);
+                        ingredientCountInSushi -= ingredientCountInKitchen;
+                        storehouse.KitchenIngredients.Remove(ingredientInSushi.Key);
                     }
                     else
                     {
-                        kitchen.KitchenIngredients[kitchenIngredient.Key] -= count;
-                        count = 0;
+                        storehouse.KitchenIngredients[ingredientInSushi.Key] -= ingredientCountInSushi;
+                        ingredientCountInSushi = 0;
                     }
 
-                    if (count == 0)
+                    if (ingredientCountInSushi == 0)
                     {
                         break;
                     }
                 }
             }
-
-            return true;
         }
     }
 }

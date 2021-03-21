@@ -61,11 +61,13 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
-            if (!_kitchenStorage.TakeFromKitchen(_sushiStorage.GetElement
-                (new SushiBindingModel { Id = order.SushiId }).SushiIngredients, order.Count))
+
+            var sushi = _sushiStorage.GetElement(new SushiBindingModel
             {
-                throw new Exception("Недостаточно ингредиентов");
-            }
+                Id = order.SushiId
+            });
+
+            _kitchenStorage.CheckAndWriteOff(sushi, order.Count);
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
