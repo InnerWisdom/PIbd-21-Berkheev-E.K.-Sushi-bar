@@ -11,11 +11,11 @@ namespace SushiBarBusinessLogic.BusinessLogics
     public class ReportLogic
     {
         private readonly IIngredientStorage _ingredientStorage;
-        private readonly ISushiStorage _printedStorage;
+        private readonly ISushiStorage _sushiStorage;
         private readonly IOrderStorage _orderStorage;
-        public ReportLogic(ISushiStorage printedStorage, IIngredientStorage ingredientStorage, IOrderStorage orderStorage)
+        public ReportLogic(ISushiStorage sushiStorage, IIngredientStorage ingredientStorage, IOrderStorage orderStorage)
         {
-            _printedStorage = printedStorage;
+            _sushiStorage = sushiStorage;
             _ingredientStorage = ingredientStorage;
             _orderStorage = orderStorage;
         }
@@ -26,22 +26,22 @@ namespace SushiBarBusinessLogic.BusinessLogics
         public List<ReportSushiIngredientViewModel> GetSushiIngredient()
         {
             var ingredients = _ingredientStorage.GetFullList();
-            var printeds = _printedStorage.GetFullList();
+            var sushis = _sushiStorage.GetFullList();
             var list = new List<ReportSushiIngredientViewModel>();
-            foreach (var printed in printeds)
+            foreach (var sushi in sushis)
             {
                 var record = new ReportSushiIngredientViewModel
                 {
-                    SushiName = printed.SushiName,
+                    SushiName = sushi.SushiName,
                     Ingredients = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
                 foreach (var ingredient in ingredients)
                 {
-                    if (printed.SushiIngredients.ContainsKey(ingredient.Id))
+                    if (sushi.SushiIngredients.ContainsKey(ingredient.Id))
                     {
-                        record.Ingredients.Add(new Tuple<string, int>(ingredient.IngredientName, printed.SushiIngredients[ingredient.Id].Item2));
-                        record.TotalCount += printed.SushiIngredients[ingredient.Id].Item2;
+                        record.Ingredients.Add(new Tuple<string, int>(ingredient.IngredientName, sushi.SushiIngredients[ingredient.Id].Item2));
+                        record.TotalCount += sushi.SushiIngredients[ingredient.Id].Item2;
                     }
                 }
                 list.Add(record);
@@ -76,7 +76,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 FileName = model.FileName,
                 Title = "Список изделий",
-                Sushis = _printedStorage.GetFullList()
+                Sushis = _sushiStorage.GetFullList()
             });
         }
         /// <summary>

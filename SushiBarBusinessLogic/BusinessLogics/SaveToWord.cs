@@ -28,11 +28,11 @@ namespace SushiBarBusinessLogic.BusinessLogics
 						JustificationValues = JustificationValues.Center
 					}
 				}));
-				foreach (var printed in info.Sushis)
+				foreach (var sushi in info.Sushis)
 				{
 					docBody.AppendChild(CreateParagraph(new WordParagraph
 					{
-						Texts = new List<(string, WordTextProperties)> { ($"{printed.SushiName}: ", new WordTextProperties { Size = "24", Bold = true }), (printed.Price.ToString(), new WordTextProperties { Size = "24" }) },
+						Texts = new List<(string, WordTextProperties)> { ($"{sushi.SushiName}: ", new WordTextProperties { Size = "24", Bold = true }), (sushi.Price.ToString(), new WordTextProperties { Size = "24" }) },
 						TextProperties = new WordTextProperties
 						{
 							Size = "24",
