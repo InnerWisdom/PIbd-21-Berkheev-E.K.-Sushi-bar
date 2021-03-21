@@ -32,14 +32,14 @@ namespace SushiBarDatabaseImplement.Implements
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
         {
-            if (model == null)
+            if (model == null || model.DateFrom == null || model.DateTo == null)
             {
                 return null;
             }
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.SushiId == model.SushiId)
+                .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
