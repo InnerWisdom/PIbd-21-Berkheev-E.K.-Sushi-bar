@@ -37,7 +37,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             var element = _kitchenStorage.GetElement(new KitchenBindingModel { KitchenName = model.KitchenName });
             if (element != null && element.Id != model.Id)
             {
-                throw new Exception("Уже есть склад с таким названием");
+                throw new Exception("Уже есть кухня с таким названием");
             }
             if (model.Id.HasValue)
             {
