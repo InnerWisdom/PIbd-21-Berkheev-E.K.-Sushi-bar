@@ -31,9 +31,8 @@ namespace SushiBarView
         {
             this.ButtonSaveToExcel = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIngredient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnSushi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIngredient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -55,9 +54,8 @@ namespace SushiBarView
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnId,
-            this.ColumnIngredient,
             this.ColumnSushi,
+            this.ColumnIngredient,
             this.ColumnCount});
             this.dataGridView.Location = new System.Drawing.Point(26, 72);
             this.dataGridView.Name = "dataGridView";
@@ -66,21 +64,15 @@ namespace SushiBarView
             this.dataGridView.Size = new System.Drawing.Size(306, 252);
             this.dataGridView.TabIndex = 8;
             // 
-            // ColumnId
+            // ColumnSushi
             // 
-            this.ColumnId.HeaderText = "Id";
-            this.ColumnId.Name = "ColumnId";
-            this.ColumnId.Visible = false;
+            this.ColumnSushi.HeaderText = "Sushi";
+            this.ColumnSushi.Name = "ColumnSushi";
             // 
             // ColumnIngredient
             // 
             this.ColumnIngredient.HeaderText = "Ингредиент";
             this.ColumnIngredient.Name = "ColumnIngredient";
-            // 
-            // ColumnSushi
-            // 
-            this.ColumnSushi.HeaderText = "Sushi";
-            this.ColumnSushi.Name = "ColumnSushi";
             // 
             // ColumnCount
             // 
@@ -106,9 +98,8 @@ namespace SushiBarView
 
         private System.Windows.Forms.Button ButtonSaveToExcel;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngredient;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnSushi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIngredient;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCount;
     }
 }

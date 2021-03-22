@@ -48,7 +48,8 @@ namespace SushiBarView
 			}
 		}
 
-		private void ButtonToPdf_Click(object sender, EventArgs e)
+        [Obsolete]
+        private void ButtonToPdf_Click(object sender, EventArgs e)
 		{
 			if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
 			{

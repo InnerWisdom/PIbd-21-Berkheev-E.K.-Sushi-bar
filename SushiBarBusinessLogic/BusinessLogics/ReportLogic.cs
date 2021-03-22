@@ -75,7 +75,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список изделий",
+                Title = "Список суши",
                 Sushis = _sushiStorage.GetFullList()
             });
         }
@@ -88,7 +88,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список изделий",
+                Title = "Список суши",
                 SushiIngredients = GetSushiIngredient()
             });
         }
