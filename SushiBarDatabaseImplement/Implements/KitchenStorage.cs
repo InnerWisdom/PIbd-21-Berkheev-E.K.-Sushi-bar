@@ -98,11 +98,11 @@ namespace SushiBarDatabaseImplement.Implements
                     {
                         int ingredientCountInSushi = ingredientInSushi.Value.Item2 * sushiCountInOrder;
 
-                        List<KitchenIngredient> certainPrintedIngredients = context.KitchenIngredients
+                        List<KitchenIngredient> certainIngredients = context.KitchenIngredients
                             .Where(kitchen => kitchen.IngredientId == ingredientInSushi.Key)
                             .ToList();
 
-                        foreach (var ingredient in certainPrintedIngredients)
+                        foreach (var ingredient in certainIngredients)
                         {
                             int ingredientCountInKitchen = ingredient.Count;
 
@@ -145,6 +145,7 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     try
                     {
+                        model.DateCreate = DateTime.Now;
                         CreateModel(model, new Kitchen(), context);
                         context.SaveChanges();
 
