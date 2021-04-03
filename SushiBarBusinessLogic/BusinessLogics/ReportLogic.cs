@@ -25,7 +25,6 @@ namespace SushiBarBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportSushiIngredientViewModel> GetSushiIngredient()
         {
-            var ingredients = _ingredientStorage.GetFullList();
             var sushis = _sushiStorage.GetFullList();
             var list = new List<ReportSushiIngredientViewModel>();
             foreach (var sushi in sushis)
@@ -36,13 +35,10 @@ namespace SushiBarBusinessLogic.BusinessLogics
                     Ingredients = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var ingredient in ingredients)
+                foreach (var ingredient in sushi.SushiIngredients)
                 {
-                    if (sushi.SushiIngredients.ContainsKey(ingredient.Id))
-                    {
-                        record.Ingredients.Add(new Tuple<string, int>(ingredient.IngredientName, sushi.SushiIngredients[ingredient.Id].Item2));
-                        record.TotalCount += sushi.SushiIngredients[ingredient.Id].Item2;
-                    }
+                    record.Ingredients.Add(new Tuple<string, int>(ingredient.Value.Item1, ingredient.Value.Item2));
+                    record.TotalCount += ingredient.Value.Item2;
                 }
                 list.Add(record);
             }

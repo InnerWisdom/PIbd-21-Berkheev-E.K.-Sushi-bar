@@ -26,14 +26,16 @@ namespace SushiBarListImplement.Implements
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
         {
-            if (model == null || model.DateFrom == null || model.DateTo == null)
+            if (model == null)
             {
                 return null;
             }
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date 
+                && order.DateCreate.Date <= model.DateTo.Value.Date))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -113,10 +115,19 @@ namespace SushiBarListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string sushiName = null;
+            foreach (var sushi in source.Sushis)
+            {
+                if (sushi.Id == order.SushiId)
+                {
+                    sushiName = sushi.SushiName;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
+                SushiName= sushiName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,

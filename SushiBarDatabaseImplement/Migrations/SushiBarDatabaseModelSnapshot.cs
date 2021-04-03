@@ -113,7 +113,7 @@ namespace SushiBarDatabaseImplement.Migrations
 
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("SushiBarDatabaseImplement.Models.Sushi", null)
+                    b.HasOne("SushiBarDatabaseImplement.Models.Sushi", "Sushi")
                         .WithMany("Orders")
                         .HasForeignKey("SushiId")
                         .OnDelete(DeleteBehavior.Cascade)
