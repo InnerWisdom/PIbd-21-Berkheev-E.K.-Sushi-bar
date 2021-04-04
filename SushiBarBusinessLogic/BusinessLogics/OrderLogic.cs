@@ -31,11 +31,11 @@ namespace SushiBarBusinessLogic.BusinessLogics
             _orderStorage.Insert(new OrderBindingModel
             {
                 SushiId = model.SushiId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
-                Status = OrderStatus.Принят,
-                DateImplement=DateTime.Now
+                Status = OrderStatus.Принят
             });
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
@@ -60,9 +60,9 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
+                DateImplement = order.DateImplement,
                 Status = OrderStatus.Выполняется
-            });
+            }); ;
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {

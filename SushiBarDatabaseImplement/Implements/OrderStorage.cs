@@ -16,20 +16,9 @@ namespace SushiBarDatabaseImplement.Implements
         {
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                return context.Orders
-                .Include(rec => rec.Sushi)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    SushiId = rec.SushiId,
-                    SushiName = rec.Sushi.SushiName,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                })
-                .ToList();
+                return context.Orders.Include(rec => rec.Sushi)
+                    .Include(rec => rec.Client)
+                    .Select(CreateModel).ToList();
             }
         }
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
@@ -40,23 +29,13 @@ namespace SushiBarDatabaseImplement.Implements
             }
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                return context.Orders
+                return context.Orders.Include(rec => rec.Sushi)
+                .Include(rec => rec.Client)
                 .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
                 (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date
-                && rec.DateCreate.Date <= model.DateTo.Value.Date))
-                .Include(rec => rec.Sushi)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    SushiId = rec.SushiId,
-                    SushiName = rec.Sushi.SushiName,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    Status = rec.Status,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                })
-                .ToList();
+                && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                .Select(CreateModel).ToList();
             }
         }
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -67,40 +46,22 @@ namespace SushiBarDatabaseImplement.Implements
             }
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                Order order = context.Orders
-                .Include(rec => rec.Sushi)
+                var order = context.Orders.Include(rec => rec.Sushi)
+                .Include(rec => rec.Client)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
-                new OrderViewModel
-                {
-                    Id = order.Id,
-                    SushiId = order.SushiId,
-                    SushiName = order.Sushi.SushiName,
-                    Count = order.Count,
-                    Sum = order.Sum,
-                    Status = order.Status,
-                    DateCreate = order.DateCreate,
-                    DateImplement = order.DateImplement,
-                } :
-                null;
+                CreateModel(order) : null;
             }
         }
         public void Insert(OrderBindingModel model)
         {
-            using (SushiBarDatabase context = new SushiBarDatabase())
+            if (!model.ClientId.HasValue)
             {
-                Order order = new Order
-                {
-                    SushiId = model.SushiId,
-                    Count = model.Count,
-                    Sum = model.Sum,
-                    Status = model.Status,
-                    DateCreate = model.DateCreate,
-                    DateImplement = model.DateImplement,
-                };
-                context.Orders.Add(order);
-                context.SaveChanges();
-                CreateModel(model, order);
+                throw new Exception("Client not specified");
+            }
+            using (var context = new SushiBarDatabase())
+            {
+                context.Orders.Add(CreateModel(model, new Order()));
                 context.SaveChanges();
             }
         }
@@ -108,10 +69,17 @@ namespace SushiBarDatabaseImplement.Implements
         {
             using (var context = new SushiBarDatabase())
             {
-                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Orders.Include(rec => rec.Client)
+                    .Include(rec => rec.Sushi)
+                    .FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
+                }
+                if (!model.ClientId.HasValue)
+                {
+                    model.ClientId = element.ClientId;
+                    
                 }
                 CreateModel(model, element);
                 context.SaveChanges();
@@ -135,30 +103,31 @@ namespace SushiBarDatabaseImplement.Implements
         }
         private Order CreateModel(OrderBindingModel model, Order order)
         {
-            if (model == null)
-            {
-                return null;
-            }
-
-            using (SushiBarDatabase context = new SushiBarDatabase())
-            {
-                Sushi element = context.Sushis.FirstOrDefault(rec => rec.Id == model.SushiId);
-                if (element != null)
-                {
-                    if (element.Orders == null)
-                    {
-                        element.Orders = new List<Order>();
-                    }
-                    element.Orders.Add(order);
-                    context.Sushis.Update(element);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Элемент не найден");
-                }
-            }
+            order.SushiId = model.SushiId;
+            order.ClientId = Convert.ToInt32(model.ClientId);
+            order.Count = model.Count;
+            order.Status = model.Status;
+            order.Sum = model.Sum;
+            order.DateCreate = model.DateCreate;
+            order.DateImplement = model.DateImplement;
             return order;
+        }
+
+        private OrderViewModel CreateModel(Order order)
+        {
+            return new OrderViewModel
+            {
+                Id = order.Id,
+                SushiId = order.SushiId,
+                ClientId = order.ClientId,
+                ClientFIO = order.Client.ClientFIO,
+                SushiName = order.Sushi.SushiName,
+                Count = order.Count,
+                Sum = order.Sum,
+                Status = order.Status,
+                DateCreate = order.DateCreate,
+                DateImplement = order?.DateImplement
+            };
         }
     }
 }

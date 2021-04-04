@@ -14,28 +14,31 @@ namespace SushiBarView
         public new IUnityContainer Container { get; set; }
         private readonly SushiLogic _logicP;
         private readonly OrderLogic _logicO;
+        private readonly ClientLogic _logicClient;
 
-        public FormCreateOrder(SushiLogic logicP, OrderLogic logicO)
+        public FormCreateOrder(SushiLogic logicP, OrderLogic logicO, ClientLogic logicClient)
         {
             InitializeComponent();
             _logicP = logicP;
             _logicO = logicO;
+            _logicClient = logicClient;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
-           
-                try
-                {
-                List<SushiViewModel> list = _logicP.Read(null);
-                if (list != null)
-                {
-                    comboBoxSushi.DisplayMember = "SushiName";
-                    comboBoxSushi.ValueMember = "Id";
-                    comboBoxSushi.DataSource = list;
-                    comboBoxSushi.SelectedItem = null;
-                }
+            try
+            {
+                var list = _logicP.Read(null);
+                comboBoxSushi.DataSource = list;
+                var sushis = _logicP.Read(null);
+                var clients = _logicClient.Read(null);
+                comboBoxSushi.DataSource = sushis;
+                comboBoxSushi.DisplayMember = "SushiName";
+                comboBoxSushi.ValueMember = "Id";
+                comboBoxClients.DataSource = clients;
+                comboBoxClients.DisplayMember = "ClientFIO";
+                comboBoxClients.ValueMember = "Id";
             }
-                catch (Exception ex)
+            catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                    MessageBoxIcon.Error);
@@ -88,6 +91,12 @@ namespace SushiBarView
                MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClients.SelectedValue == null)
+            {
+                MessageBox.Show("Select client", "Error", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
@@ -95,7 +104,7 @@ namespace SushiBarView
                     SushiId = Convert.ToInt32(comboBoxSushi.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text),
-                    Status=0
+                    ClientId = Convert.ToInt32(comboBoxClients.SelectedValue),
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
