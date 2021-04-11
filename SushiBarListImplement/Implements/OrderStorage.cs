@@ -113,6 +113,14 @@ namespace SushiBarListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string sushiName = null;
+            foreach (var sushi in source.Sushis)
+            {
+                if (sushi.Id == order.SushiId)
+                {
+                    sushiName = sushi.SushiName;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
