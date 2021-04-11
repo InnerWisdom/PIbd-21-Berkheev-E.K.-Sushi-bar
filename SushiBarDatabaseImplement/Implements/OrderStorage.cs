@@ -20,7 +20,7 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     SushiId = rec.SushiId,
-                    SushiName = context.Sushis.FirstOrDefault(pr => pr.Id == rec.SushiId).SushiName,
+                    SushiName = rec.Sushi.SushiName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
@@ -44,7 +44,7 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     SushiId = rec.SushiId,
-                    SushiName = context.Sushis.FirstOrDefault(pr => pr.Id == rec.SushiId).SushiName,
+                    SushiName = rec.Sushi.SushiName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
@@ -69,7 +69,7 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     Id = order.Id,
                     SushiId = order.SushiId,
-                    SushiName = context.Sushis.FirstOrDefault(rec => rec.Id == order.SushiId)?.SushiName,
+                    SushiName = rec.Sushi.SushiName,
                     Count = order.Count,
                     Sum = order.Sum,
                     Status = order.Status,
