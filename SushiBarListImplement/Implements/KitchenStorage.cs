@@ -174,7 +174,7 @@ namespace SushiBarListImplement.Implements
                 }
             }
         }
-        public bool TakeFromKitchen(Dictionary<int, (string, int)> ingredients, int sushiCount)
+        public void CheckAndWriteOff(SushiViewModel model, int sushiCountInOrder)
         {
             throw new NotImplementedException();
         }

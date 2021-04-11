@@ -100,7 +100,10 @@
             this.Controls.Add(this.ButtonUpd);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.dataGridView);
+
+            this.Name = "Ingredients";
             this.Name = "FormIngredients";
+
             this.Text = "Ингредиенты";
             this.Load += new System.EventHandler(this.FormIngredients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
