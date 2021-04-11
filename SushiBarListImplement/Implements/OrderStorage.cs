@@ -113,7 +113,6 @@ namespace SushiBarListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-
             string sushiName = null;
             foreach (var sushi in source.Sushis)
             {
