@@ -10,8 +10,8 @@ using SushiBarDatabaseImplement;
 namespace SushiBarDatabaseImplement.Migrations
 {
     [DbContext(typeof(SushiBarDatabase))]
-    [Migration("20210315211400_InitialCreateSample")]
-    partial class InitialCreateSample
+    [Migration("20210403193848_FirstSample")]
+    partial class FirstSample
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,7 +115,7 @@ namespace SushiBarDatabaseImplement.Migrations
 
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>
                 {
-                    b.HasOne("SushiBarDatabaseImplement.Models.Sushi", null)
+                    b.HasOne("SushiBarDatabaseImplement.Models.Sushi", "Sushi")
                         .WithMany("Orders")
                         .HasForeignKey("SushiId")
                         .OnDelete(DeleteBehavior.Cascade)

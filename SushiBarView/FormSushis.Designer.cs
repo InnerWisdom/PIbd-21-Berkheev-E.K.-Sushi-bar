@@ -102,7 +102,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "FormSushis";
             this.Text = "Суши";
-            this.Load += new System.EventHandler(this.FormComponents_Load);
+            this.Load += new System.EventHandler(this.FormSushis_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

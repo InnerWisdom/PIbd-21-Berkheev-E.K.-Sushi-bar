@@ -1,8 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cquential.Microsoft.ReportViewer.DataVisualization" Version="10.0.40219.1" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms" Version="150.1440.0" />
+    <PackageReference Include="Microsoft.ReportViewer" Version="11.0.3366.16" />
+    <PackageReference Include="Microsoft.ReportViewer.Common" Version="10.0.40219.1" />
+    <PackageReference Include="Microsoft.SqlServer.Types" Version="14.0.1016.290" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SushiBarBusinessLogic\SushiBarBusinessLogic.csproj" />

@@ -8,6 +8,7 @@ namespace SushiBarDatabaseImplement.Models
     {
         public int Id { get; set; }
         public int SushiId { get; set; }
+        public virtual Sushi Sushi { get; set; }
         [Required]
         public int Count { get; set; }
         [Required]

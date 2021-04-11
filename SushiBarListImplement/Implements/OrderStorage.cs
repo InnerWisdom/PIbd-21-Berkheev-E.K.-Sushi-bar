@@ -33,7 +33,9 @@ namespace SushiBarListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.SushiId == model.SushiId)
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date 
+                && order.DateCreate.Date <= model.DateTo.Value.Date))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -113,10 +115,19 @@ namespace SushiBarListImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
+            string sushiName = null;
+            foreach (var sushi in source.Sushis)
+            {
+                if (sushi.Id == order.SushiId)
+                {
+                    sushiName = sushi.SushiName;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
+                SushiName= sushiName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
