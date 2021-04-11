@@ -144,6 +144,9 @@
     <EmbeddedResource Include="FormSushiIngredient.resx">
       <DependentUpon>FormSushiIngredient.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormSushis.resx">
+      <DependentUpon>FormSushis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -171,6 +174,10 @@
     <ProjectReference Include="..\SushiBarBusinessLogic\SushiBarBusinessLogic.csproj">
       <Project>{aba3a75c-3bb5-4142-8653-194095a062d3}</Project>
       <Name>SushiBarBusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SushiBarFileImplement\SushiBarFileImplement.csproj">
+      <Project>{33a2bf92-b98f-4da9-9ac4-2820b1555f67}</Project>
+      <Name>SushiBarFileImplement</Name>
     </ProjectReference>
     <ProjectReference Include="..\SushiBarListImplement\SushiBarListImplement.csproj">
       <Project>{a77d0882-4a91-43fb-a991-d76168bf0b5c}</Project>
