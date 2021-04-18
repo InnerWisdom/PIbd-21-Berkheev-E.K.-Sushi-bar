@@ -80,9 +80,5 @@ namespace SushiBarView
 			}
 		}
 
-        private void FormViewReport_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
