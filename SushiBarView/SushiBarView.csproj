@@ -231,6 +231,18 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportKitchenIngredients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportKitchenIngredients.Designer.cs">
+      <DependentUpon>FormReportKitchenIngredients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportOrderByDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrderByDate.Designer.cs">
+      <DependentUpon>FormReportOrderByDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportSushiIngredients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +297,12 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportKitchenIngredients.resx">
+      <DependentUpon>FormReportKitchenIngredients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrderByDate.resx">
+      <DependentUpon>FormReportOrderByDate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportSushiIngredients.resx">
       <DependentUpon>FormReportSushiIngredients.cs</DependentUpon>
     </EmbeddedResource>
@@ -300,6 +318,7 @@
     <EmbeddedResource Include="FormViewReport.resx">
       <DependentUpon>FormViewReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderReportByDate.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -323,6 +342,7 @@
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\DataSources\SqlServerTypes.Utilities.datasource" />
     <None Include="Properties\DataSources\SushiBarBusinessLogic.ViewModels.IngredientViewModel.datasource" />
+    <None Include="Properties\DataSources\SushiBarBusinessLogic.ViewModels.KitchenViewModel.datasource" />
     <None Include="Properties\DataSources\SushiBarBusinessLogic.ViewModels.OrderViewModel.datasource" />
     <None Include="Properties\DataSources\SushiBarBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
     <None Include="Properties\DataSources\SushiBarBusinessLogic.ViewModels.ReportSushiIngredientViewModel.datasource" />

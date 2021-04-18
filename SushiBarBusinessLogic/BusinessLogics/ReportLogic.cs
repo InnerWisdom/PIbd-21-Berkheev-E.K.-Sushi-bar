@@ -10,14 +10,14 @@ namespace SushiBarBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly IIngredientStorage _ingredientStorage;
         private readonly ISushiStorage _sushiStorage;
         private readonly IOrderStorage _orderStorage;
-        public ReportLogic(ISushiStorage sushiStorage, IIngredientStorage ingredientStorage, IOrderStorage orderStorage)
+        private readonly IKitchenStorage _kitchenStorage;
+        public ReportLogic(ISushiStorage sushiStorage, IOrderStorage orderStorage, IKitchenStorage kitchenStorage)
         {
             _sushiStorage = sushiStorage;
-            _ingredientStorage = ingredientStorage;
             _orderStorage = orderStorage;
+            _kitchenStorage = kitchenStorage;
         }
         /// <summary>
         /// Получение списка компонент с указанием, в каких изделиях используются
@@ -103,6 +103,71 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+
+        public List<ReportKitchenIngredientViewModel> GetKitchenIngredient()
+        {
+            var stores = _kitchenStorage.GetFullList();
+            var list = new List<ReportKitchenIngredientViewModel>();
+            foreach (var store in stores)
+            {
+                var record = new ReportKitchenIngredientViewModel
+                {
+                    KitchenName = store.KitchenName,
+                    Ingredients = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in store.KitchenIngredients)
+                {
+                    record.Ingredients.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+
+        public List<OrderReportByDateViewModel> GetOrderReportByDate()
+        {
+            return _orderStorage.GetFullList()
+                .GroupBy(order => order.DateCreate.ToShortDateString())
+                .Select(rec => new OrderReportByDateViewModel
+                {
+                    Date = Convert.ToDateTime(rec.Key),
+                    Count = rec.Count(),
+                    Sum = rec.Sum(order => order.Sum)
+                })
+                .ToList();
+        }
+
+        public void SaveKitchensToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateKitchensDoc(new KitchenWordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список кухонь",
+                Kitchens = _kitchenStorage.GetFullList()
+            });
+        }
+
+        public void SaveKitchenIngredientToExcelFile(ReportBindingModel model)
+        {
+            SaveToExcel.CreateKitchensDoc(new KitchensExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список кухонь",
+                KitchenIngredients = GetKitchenIngredient()
+            });
+        }
+
+        public void SaveOrderReportByDateToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDocOrderReportByDate(new PdfInfoOrderReportByDate
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Orders = GetOrderReportByDate()
             });
         }
     }
