@@ -45,6 +45,7 @@
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
             this.toolStripButtonFillKitchen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButtonFillKitchen = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +54,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
-            this.toolStripDropDownButtonReports});
+            this.toolStripDropDownButtonReports,
+            this.toolStripDropDownButtonFillKitchen});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -76,21 +78,21 @@
             // КомпонентыToolStripMenuItem
             // 
             this.КомпонентыToolStripMenuItem.Name = "КомпонентыToolStripMenuItem";
-            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.КомпонентыToolStripMenuItem.Text = "Ингредиенты";
             this.КомпонентыToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
             // ИзделияToolStripMenuItem
             // 
             this.ИзделияToolStripMenuItem.Name = "ИзделияToolStripMenuItem";
-            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ИзделияToolStripMenuItem.Text = "Суши";
             this.ИзделияToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
             // кухниToolStripMenuItem
             // 
             this.кухниToolStripMenuItem.Name = "кухниToolStripMenuItem";
-            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.кухниToolStripMenuItem.Text = "Кухни";
             this.кухниToolStripMenuItem.Click += new System.EventHandler(this.кухниToolStripMenuItem_Click);
             // 
@@ -198,6 +200,16 @@
             this.toolStripButtonFillKitchen.Text = "Заполнение кухни";
             this.toolStripButtonFillKitchen.ToolTipText = "toolStripButtonFillKitchen";
             // 
+            // toolStripDropDownButtonFillKitchen
+            // 
+            this.toolStripDropDownButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonFillKitchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonFillKitchen.Image")));
+            this.toolStripDropDownButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonFillKitchen.Name = "toolStripDropDownButtonFillKitchen";
+            this.toolStripDropDownButtonFillKitchen.Size = new System.Drawing.Size(122, 22);
+            this.toolStripDropDownButtonFillKitchen.Text = "Заполнение кухни";
+            this.toolStripDropDownButtonFillKitchen.Click += new System.EventHandler(this.toolStripDropDownButtonFillKitchen_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,5 +251,6 @@
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem кухниToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonFillKitchen;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonFillKitchen;
     }
 }
