@@ -154,30 +154,30 @@ namespace SushiBarView
             var form = Container.Resolve<FormViewReport>();
             form.ShowDialog();
         }
-    }
+
         private void кухниToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormKitchens>();
             form.ShowDialog();
         }
-
-        private void заполнениеКухниToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormFillKitchen>();
-            form.ShowDialog();
-        }
-
-        private void toolStripDropDownButtonFillKitchen_Click(object sender, EventArgs e)
-        {
-
-            var form = Container.Resolve<FormFillKitchen>();
-            form.ShowDialog();
-        }
-
-        private void toolStripButtonFillKitchen_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormFillKitchen>();
-            form.ShowDialog();
-        }
     }
+
+    /*private void заполнениеКухниToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var form = Container.Resolve<FormFillKitchen>();
+        form.ShowDialog();
+    }
+
+    private void toolStripDropDownButtonFillKitchen_Click(object sender, EventArgs e)
+    {
+
+        var form = Container.Resolve<FormFillKitchen>();
+        form.ShowDialog();
+    }
+
+    private void toolStripButtonFillKitchen_Click(object sender, EventArgs e)
+    {
+        var form = Container.Resolve<FormFillKitchen>();
+        form.ShowDialog();
+    }*/
 }
