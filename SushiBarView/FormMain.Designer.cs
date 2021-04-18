@@ -37,12 +37,14 @@
             this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.кухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonTakeOrderInWork = new System.Windows.Forms.Button();
             this.ButtonOrderReady = new System.Windows.Forms.Button();
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
+            this.toolStripButtonFillKitchen = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +65,8 @@
             this.toolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.КомпонентыToolStripMenuItem,
-            this.ИзделияToolStripMenuItem});
+            this.ИзделияToolStripMenuItem,
+            this.кухниToolStripMenuItem});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
             this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton.Name = "toolStripDropDownButton";
@@ -73,14 +76,14 @@
             // КомпонентыToolStripMenuItem
             // 
             this.КомпонентыToolStripMenuItem.Name = "КомпонентыToolStripMenuItem";
-            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.КомпонентыToolStripMenuItem.Text = "Ингредиенты";
             this.КомпонентыToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
             // ИзделияToolStripMenuItem
             // 
             this.ИзделияToolStripMenuItem.Name = "ИзделияToolStripMenuItem";
-            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ИзделияToolStripMenuItem.Text = "Суши";
             this.ИзделияToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
@@ -118,11 +121,18 @@
             this.списокЗаказовToolStripMenuItem.Text = "Список заказов";
             this.списокЗаказовToolStripMenuItem.Click += new System.EventHandler(this.списокЗаказовToolStripMenuItem_Click);
             // 
+            // кухниToolStripMenuItem
+            // 
+            this.кухниToolStripMenuItem.Name = "кухниToolStripMenuItem";
+            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кухниToolStripMenuItem.Text = "Кухни";
+            this.кухниToolStripMenuItem.Click += new System.EventHandler(this.кухниToolStripMenuItem_Click);
+            // 
             // DataGridView
             // 
             this.DataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.DataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridView.Location = new System.Drawing.Point(1, 32);
+            this.DataGridView.Location = new System.Drawing.Point(1, 28);
             this.DataGridView.MultiSelect = false;
             this.DataGridView.Name = "DataGridView";
             this.DataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -179,6 +189,17 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
+            // toolStripButtonFillKitchen
+            // 
+            this.toolStripButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonFillKitchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFillKitchen.Image")));
+            this.toolStripButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonFillKitchen.Name = "toolStripButtonFillKitchen";
+            this.toolStripButtonFillKitchen.Size = new System.Drawing.Size(113, 22);
+            this.toolStripButtonFillKitchen.Text = "Заполнение кухни";
+            this.toolStripButtonFillKitchen.ToolTipText = "toolStripButtonFillKitchen";
+            this.toolStripButtonFillKitchen.Click += new System.EventHandler(this.toolStripButtonFillKitchen_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,5 +239,7 @@
         private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem компонентыПоИзделиямToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem кухниToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButtonFillKitchen;
     }
 }
