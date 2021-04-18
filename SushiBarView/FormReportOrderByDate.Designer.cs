@@ -68,7 +68,7 @@ namespace SushiBarView
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "SushiBarView.Report.rdlc";
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "SushiBarView.OrderReportByDate.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(77, 114);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.ServerReport.BearerToken = null;
@@ -113,6 +113,7 @@ namespace SushiBarView
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormReportOrderByDate";
             this.Text = "FormReportOrderByDate";
+            this.Load += new System.EventHandler(this.FormReportOrderByDate_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
