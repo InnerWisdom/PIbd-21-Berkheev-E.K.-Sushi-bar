@@ -49,7 +49,7 @@ namespace SushiBarView
             this.buttonRef.Name = "buttonRef";
             this.buttonRef.Size = new System.Drawing.Size(96, 65);
             this.buttonRef.TabIndex = 1;
-            this.buttonRef.Text = "button1";
+            this.buttonRef.Text = "Refresh";
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
@@ -59,7 +59,7 @@ namespace SushiBarView
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(89, 53);
             this.buttonDel.TabIndex = 2;
-            this.buttonDel.Text = "button2";
+            this.buttonDel.Text = "Delete";
             this.buttonDel.UseVisualStyleBackColor = true;
             this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
@@ -72,7 +72,8 @@ namespace SushiBarView
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormClients";
-            this.Text = "FormClients";
+            this.Text = "Клиенты";
+            this.Load += new System.EventHandler(this.FormClients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

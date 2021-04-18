@@ -7,5 +7,6 @@ namespace SushiBarBusinessLogic.BindingModels
     public class ChangeStatusBindingModel
     {
         public int OrderId { get; set; }
+        public int? CookId { get; set; }
     }
 }

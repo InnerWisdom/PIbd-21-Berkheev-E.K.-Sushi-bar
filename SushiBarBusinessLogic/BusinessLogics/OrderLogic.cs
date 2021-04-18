@@ -10,6 +10,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+
+        private readonly object locker = new object();
         public OrderLogic(IOrderStorage orderStorage)
         {
             _orderStorage = orderStorage;
@@ -40,29 +42,39 @@ namespace SushiBarBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel
+            lock (locker)
             {
-                Id =
-           model.OrderId
-            });
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
+                var order = _orderStorage.GetElement(new OrderBindingModel
+                {
+                    Id = model.OrderId
+                });
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+
+                if (order.CookId.HasValue)
+                {
+                    throw new Exception("У заказа уже есть исполнитель");
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ClientId = order.ClientId,
+                    CookId = model.CookId,
+                    SushiId = order.SushiId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = order.DateImplement,
+                    Status = OrderStatus.Выполняется
+                }); ;
             }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                SushiId = order.SushiId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
-                Status = OrderStatus.Выполняется
-            }); ;
+                
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
@@ -82,6 +94,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                CookId = order.CookId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -111,6 +125,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,

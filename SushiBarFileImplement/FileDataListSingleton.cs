@@ -27,12 +27,15 @@ namespace SushiBarFileImplement
         public List<Sushi> Sushis { get; set; }
 
         public List<Client> Clients { get; set; }
+
+        public List<Cook> Cooks { get; set; }
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Sushis = LoadSushis();
             Clients = LoadClients();
+            Cooks = new List<Cook>();
         }
 
         public static FileDataListSingleton GetInstance()

@@ -113,7 +113,6 @@ namespace SushiBarView
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormViewReport";
             this.Text = "Отчет по заказам";
-            this.Load += new System.EventHandler(this.FormViewReport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
