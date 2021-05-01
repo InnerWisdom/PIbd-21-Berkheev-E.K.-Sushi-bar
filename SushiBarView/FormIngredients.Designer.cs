@@ -90,7 +90,7 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // FormComponents
+            // FormIngredients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
