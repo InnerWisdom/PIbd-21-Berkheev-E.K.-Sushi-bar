@@ -13,11 +13,12 @@ namespace SushiBarView
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
-
-        public FormMain(OrderLogic orderLogic)
+        private readonly ReportLogic _report;
+        public FormMain(OrderLogic orderLogic, ReportLogic report)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
+            this._report = report;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -124,28 +125,73 @@ namespace SushiBarView
             LoadData();
         }
 
+        private void списокКомпонентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _report.SaveIngredientsToWordFile(new ReportBindingModel
+                    {
+                        FileName =
+                   dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+
+        }
+
+        private void компонентыПоИзделиямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportSushiIngredients>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormViewReport>();
+            form.ShowDialog();
+        }
+
         private void кухниToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormKitchens>();
             form.ShowDialog();
         }
 
-        private void заполнениеКухниToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormFillKitchen>();
-            form.ShowDialog();
-        }
-
         private void toolStripDropDownButtonFillKitchen_Click(object sender, EventArgs e)
         {
-
             var form = Container.Resolve<FormFillKitchen>();
             form.ShowDialog();
         }
 
-        private void toolStripButtonFillKitchen_Click(object sender, EventArgs e)
+        private void списокКухоньToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormFillKitchen>();
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _report.SaveKitchensToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+
+                    MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ингредиентыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportKitchenIngredients>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовПоДнямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrderByDate>();
             form.ShowDialog();
         }
     }

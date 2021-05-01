@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 using System.Linq;
@@ -16,6 +17,7 @@ namespace SushiBarDatabaseImplement.Implements
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
                 return context.Orders
+                .Include(rec => rec.Sushi)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -39,7 +41,8 @@ namespace SushiBarDatabaseImplement.Implements
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.SushiId == model.SushiId)
+                .Where(rec => rec.SushiId == model.SushiId && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                .Include(rec => rec.Sushi)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -63,13 +66,14 @@ namespace SushiBarDatabaseImplement.Implements
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
                 Order order = context.Orders
+                .Include(rec => rec.Sushi)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
                 {
                     Id = order.Id,
                     SushiId = order.SushiId,
-                    SushiName = rec.Sushi.SushiName,
+                    SushiName = order.Sushi.SushiName,
                     Count = order.Count,
                     Sum = order.Sum,
                     Status = order.Status,
@@ -100,19 +104,13 @@ namespace SushiBarDatabaseImplement.Implements
         }
         public void Update(OrderBindingModel model)
         {
-            using (SushiBarDatabase context = new SushiBarDatabase())
+            using (var context = new SushiBarDatabase())
             {
-                Order element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+                var element = context.Orders.FirstOrDefault(rec => rec.Id == model.Id);
                 if (element == null)
                 {
                     throw new Exception("Элемент не найден");
                 }
-                element.SushiId = model.SushiId;
-                element.Count = model.Count;
-                element.Sum = model.Sum;
-                element.Status = model.Status;
-                element.DateCreate = model.DateCreate;
-                element.DateImplement = model.DateImplement;
                 CreateModel(model, element);
                 context.SaveChanges();
             }

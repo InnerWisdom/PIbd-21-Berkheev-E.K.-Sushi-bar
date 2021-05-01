@@ -34,6 +34,10 @@
             this.КомпонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ИзделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.кухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButtonReports = new System.Windows.Forms.ToolStripDropDownButton();
+            this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonTakeOrderInWork = new System.Windows.Forms.Button();
@@ -41,6 +45,10 @@
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
             this.toolStripButtonFillKitchen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButtonFillKitchen = new System.Windows.Forms.ToolStripDropDownButton();
+            this.списокКухоньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ингредиентыПоСкладамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.списокЗаказовПоДнямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +57,8 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
-            this.toolStripButtonFillKitchen});
+            this.toolStripDropDownButtonReports,
+            this.toolStripDropDownButtonFillKitchen});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -72,23 +81,60 @@
             // КомпонентыToolStripMenuItem
             // 
             this.КомпонентыToolStripMenuItem.Name = "КомпонентыToolStripMenuItem";
-            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.КомпонентыToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.КомпонентыToolStripMenuItem.Text = "Ингредиенты";
             this.КомпонентыToolStripMenuItem.Click += new System.EventHandler(this.КомпонентыToolStripMenuItem_Click);
             // 
             // ИзделияToolStripMenuItem
             // 
             this.ИзделияToolStripMenuItem.Name = "ИзделияToolStripMenuItem";
-            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ИзделияToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.ИзделияToolStripMenuItem.Text = "Суши";
             this.ИзделияToolStripMenuItem.Click += new System.EventHandler(this.ИзделияToolStripMenuItem_Click);
             // 
             // кухниToolStripMenuItem
             // 
             this.кухниToolStripMenuItem.Name = "кухниToolStripMenuItem";
-            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кухниToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.кухниToolStripMenuItem.Text = "Кухни";
             this.кухниToolStripMenuItem.Click += new System.EventHandler(this.кухниToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButtonReports
+            // 
+            this.toolStripDropDownButtonReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonReports.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.списокКомпонентовToolStripMenuItem,
+            this.компонентыПоИзделиямToolStripMenuItem,
+            this.списокЗаказовToolStripMenuItem,
+            this.списокКухоньToolStripMenuItem,
+            this.ингредиентыПоСкладамToolStripMenuItem,
+            this.списокЗаказовПоДнямToolStripMenuItem});
+            this.toolStripDropDownButtonReports.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonReports.Image")));
+            this.toolStripDropDownButtonReports.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonReports.Name = "toolStripDropDownButtonReports";
+            this.toolStripDropDownButtonReports.Size = new System.Drawing.Size(61, 22);
+            this.toolStripDropDownButtonReports.Text = "Отчеты";
+            // 
+            // списокКомпонентовToolStripMenuItem
+            // 
+            this.списокКомпонентовToolStripMenuItem.Name = "списокКомпонентовToolStripMenuItem";
+            this.списокКомпонентовToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.списокКомпонентовToolStripMenuItem.Text = "Список ингредиентов";
+            this.списокКомпонентовToolStripMenuItem.Click += new System.EventHandler(this.списокКомпонентовToolStripMenuItem_Click);
+            // 
+            // компонентыПоИзделиямToolStripMenuItem
+            // 
+            this.компонентыПоИзделиямToolStripMenuItem.Name = "компонентыПоИзделиямToolStripMenuItem";
+            this.компонентыПоИзделиямToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.компонентыПоИзделиямToolStripMenuItem.Text = "Ингредиенты по суши";
+            this.компонентыПоИзделиямToolStripMenuItem.Click += new System.EventHandler(this.компонентыПоИзделиямToolStripMenuItem_Click);
+            // 
+            // списокЗаказовToolStripMenuItem
+            // 
+            this.списокЗаказовToolStripMenuItem.Name = "списокЗаказовToolStripMenuItem";
+            this.списокЗаказовToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.списокЗаказовToolStripMenuItem.Text = "Список заказов";
+            this.списокЗаказовToolStripMenuItem.Click += new System.EventHandler(this.списокЗаказовToolStripMenuItem_Click);
             // 
             // DataGridView
             // 
@@ -154,13 +200,42 @@
             // toolStripButtonFillKitchen
             // 
             this.toolStripButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonFillKitchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonFillKitchen.Image")));
             this.toolStripButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonFillKitchen.Name = "toolStripButtonFillKitchen";
             this.toolStripButtonFillKitchen.Size = new System.Drawing.Size(113, 22);
             this.toolStripButtonFillKitchen.Text = "Заполнение кухни";
             this.toolStripButtonFillKitchen.ToolTipText = "toolStripButtonFillKitchen";
-            this.toolStripButtonFillKitchen.Click += new System.EventHandler(this.toolStripButtonFillKitchen_Click);
+            // 
+            // toolStripDropDownButtonFillKitchen
+            // 
+            this.toolStripDropDownButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButtonFillKitchen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonFillKitchen.Image")));
+            this.toolStripDropDownButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButtonFillKitchen.Name = "toolStripDropDownButtonFillKitchen";
+            this.toolStripDropDownButtonFillKitchen.Size = new System.Drawing.Size(122, 22);
+            this.toolStripDropDownButtonFillKitchen.Text = "Заполнение кухни";
+            this.toolStripDropDownButtonFillKitchen.Click += new System.EventHandler(this.toolStripDropDownButtonFillKitchen_Click);
+            // 
+            // списокКухоньToolStripMenuItem
+            // 
+            this.списокКухоньToolStripMenuItem.Name = "списокКухоньToolStripMenuItem";
+            this.списокКухоньToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.списокКухоньToolStripMenuItem.Text = "Список кухонь";
+            this.списокКухоньToolStripMenuItem.Click += new System.EventHandler(this.списокКухоньToolStripMenuItem_Click);
+            // 
+            // ингредиентыПоСкладамToolStripMenuItem
+            // 
+            this.ингредиентыПоСкладамToolStripMenuItem.Name = "ингредиентыПоСкладамToolStripMenuItem";
+            this.ингредиентыПоСкладамToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.ингредиентыПоСкладамToolStripMenuItem.Text = "Ингредиенты по складам";
+            this.ингредиентыПоСкладамToolStripMenuItem.Click += new System.EventHandler(this.ингредиентыПоСкладамToolStripMenuItem_Click);
+            // 
+            // списокЗаказовПоДнямToolStripMenuItem
+            // 
+            this.списокЗаказовПоДнямToolStripMenuItem.Name = "списокЗаказовПоДнямToolStripMenuItem";
+            this.списокЗаказовПоДнямToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.списокЗаказовПоДнямToolStripMenuItem.Text = "Список заказов по дням";
+            this.списокЗаказовПоДнямToolStripMenuItem.Click += new System.EventHandler(this.списокЗаказовПоДнямToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -197,7 +272,15 @@
         private System.Windows.Forms.Button ButtonOrderReady;
         private System.Windows.Forms.Button ButtonPayOrder;
         private System.Windows.Forms.Button ButtonRef;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonReports;
+        private System.Windows.Forms.ToolStripMenuItem списокКомпонентовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem компонентыПоИзделиямToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem кухниToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonFillKitchen;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonFillKitchen;
+        private System.Windows.Forms.ToolStripMenuItem списокКухоньToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ингредиентыПоСкладамToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem списокЗаказовПоДнямToolStripMenuItem;
     }
 }

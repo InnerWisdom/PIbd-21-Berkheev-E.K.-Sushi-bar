@@ -33,7 +33,7 @@ namespace SushiBarFileImplement.Implements
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.DateCreate == model.DateCreate)
+            .Where(rec => rec.SushiId == model.SushiId && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
             .Select(CreateModel)
             .ToList();
         }

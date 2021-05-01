@@ -90,7 +90,7 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // FormComponents
+            // FormIngredients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,10 +100,7 @@
             this.Controls.Add(this.ButtonUpd);
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.dataGridView);
-
-            this.Name = "Ingredients";
             this.Name = "FormIngredients";
-
             this.Text = "Ингредиенты";
             this.Load += new System.EventHandler(this.FormIngredients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
