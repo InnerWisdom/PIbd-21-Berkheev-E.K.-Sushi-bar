@@ -154,5 +154,11 @@ namespace SushiBarView
             var form = Container.Resolve<FormViewReport>();
             form.ShowDialog();
         }
+
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
     }
 }

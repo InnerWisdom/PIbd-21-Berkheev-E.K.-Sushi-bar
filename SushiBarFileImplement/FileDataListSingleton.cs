@@ -18,17 +18,21 @@ namespace SushiBarFileImplement
 
         private readonly string SushiFileName = "Sushi.xml";
 
+
+        private readonly string ClientFileName = "Client.xml";
         public List<Ingredient> Ingredients { get; set; }
 
         public List<Order> Orders { get; set; }
 
         public List<Sushi> Sushis { get; set; }
 
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Sushis = LoadSushis();
+            Clients = LoadClients();
         }
 
         public static FileDataListSingleton GetInstance()
@@ -45,6 +49,7 @@ namespace SushiBarFileImplement
             SaveIngredients();
             SaveOrders();
             SaveSushis();
+            SaveClients();
         }
 
         private List<Ingredient> LoadIngredients()
@@ -80,11 +85,33 @@ namespace SushiBarFileImplement
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
                         SushiId = Convert.ToInt32(elem.Element("SushiId").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId")?.Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
                         Status = (OrderStatus)Convert.ToInt32(elem.Element("Status").Value),
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
                         DateImplement = String.IsNullOrEmpty(elem.Element("DateImplement").Value) ? DateTime.MinValue : Convert.ToDateTime(elem.Element("DateImplement").Value),
+                    });
+                }
+            }
+            return list;
+        }
+
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Clients").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientFIO = elem.Element("ClientFIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value
                     });
                 }
             }
@@ -143,6 +170,7 @@ namespace SushiBarFileImplement
                     xElement.Add(new XElement("Order",
                     new XAttribute("Id", order.Id),
                     new XElement("SushiId", order.SushiId),
+                    new XElement("ClientId", order.ClientId),
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
                     new XElement("Status", (int)order.Status),
@@ -151,6 +179,25 @@ namespace SushiBarFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(OrderFileName);
+            }
+        }
+
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("ClientFIO", client.ClientFIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
 

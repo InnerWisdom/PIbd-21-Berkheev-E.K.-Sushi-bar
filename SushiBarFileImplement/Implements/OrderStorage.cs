@@ -32,12 +32,11 @@ namespace SushiBarFileImplement.Implements
             {
                 return null;
             }
-            return source.Orders
-            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
-            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date 
-            && rec.DateCreate.Date <= model.DateTo.Value.Date))
-            .Select(CreateModel)
-            .ToList();
+            return source.Orders.Where(rec => (!model.DateFrom.HasValue &&
+                !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >=
+                model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId)).Select(CreateModel).ToList();
         }
 
         public OrderViewModel GetElement(OrderBindingModel model)
@@ -53,6 +52,10 @@ namespace SushiBarFileImplement.Implements
 
         public void Insert(OrderBindingModel model)
         {
+            if (!model.ClientId.HasValue)
+            {
+                throw new Exception("Client not specified");
+            }
             int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
             var element = new Order { Id = maxId + 1 };
             source.Orders.Add(CreateModel(model, element));
@@ -60,7 +63,12 @@ namespace SushiBarFileImplement.Implements
 
         public void Update(OrderBindingModel model)
         {
+            
             var element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
+            if (!model.ClientId.HasValue)
+            {
+                model.ClientId = element.ClientId;
+            }
             if (element == null)
             {
                 throw new Exception("Элемент не найден");
@@ -83,6 +91,7 @@ namespace SushiBarFileImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order order)
         {
+            order.ClientId = Convert.ToInt32(model.ClientId);
             order.SushiId = model.SushiId;
             order.Count = model.Count;
             order.Sum = model.Sum;
@@ -98,6 +107,8 @@ namespace SushiBarFileImplement.Implements
             {
                 Id = order.Id,
                 SushiId = order.SushiId,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(client => client.Id == order.ClientId)?.ClientFIO,
                 SushiName = source.Sushis.FirstOrDefault(t => t.Id == order.SushiId)?.SushiName,
                 Count = order.Count,
                 Sum = order.Sum,
