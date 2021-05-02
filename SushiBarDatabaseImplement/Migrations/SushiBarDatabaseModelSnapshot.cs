@@ -80,6 +80,54 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.ToTable("Ingredients");
                 });
 
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.Kitchen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KitchenName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponsiblePersonFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kitchens");
+                });
+
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.KitchenIngredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IngredientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KitchenId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IngredientId");
+
+                    b.HasIndex("KitchenId");
+
+                    b.ToTable("KitchenIngredients");
+                });
+
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -164,6 +212,21 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.HasIndex("SushiId");
 
                     b.ToTable("SushiIngredients");
+                });
+
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.KitchenIngredient", b =>
+                {
+                    b.HasOne("SushiBarDatabaseImplement.Models.Ingredient", "Ingredient")
+                        .WithMany("KitchenIngredients")
+                        .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SushiBarDatabaseImplement.Models.Kitchen", "Kitchen")
+                        .WithMany("KitchenIngredients")
+                        .HasForeignKey("KitchenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>

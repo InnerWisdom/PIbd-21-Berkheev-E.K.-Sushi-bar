@@ -114,6 +114,46 @@ namespace SushiBarView
             form.ShowDialog();
         }
 
+        private void кухниToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormKitchens>();
+            form.ShowDialog();
+        }
+
+        private void toolStripDropDownButtonFillKitchen_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormFillKitchen>();
+            form.ShowDialog();
+        }
+
+        private void списокКухоньToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    _report.SaveKitchensToWordFile(new ReportBindingModel
+                    {
+                        FileName = dialog.FileName
+                    });
+
+                    MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ингредиентыПоСкладамToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportKitchenIngredients>();
+            form.ShowDialog();
+        }
+
+        private void списокЗаказовПоДнямToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportOrderByDate>();
+            form.ShowDialog();
+        }
+
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormClients>();

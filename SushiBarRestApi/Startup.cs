@@ -27,7 +27,11 @@ namespace SushiBarRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ISushiStorage, SushiStorage>();
+            services.AddTransient<IKitchenStorage, KitchenStorage>();
+            services.AddTransient<IIngredientStorage, IngredientStorage>();
             services.AddTransient<OrderLogic>();
+            services.AddTransient<IngredientLogic>();
+            services.AddTransient<KitchenLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SushiLogic>();
             services.AddControllers().AddNewtonsoftJson();

@@ -44,6 +44,10 @@ namespace SushiBarView
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new
            HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IKitchenStorage, KitchenStorage>
+                (new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<KitchenLogic>(new
+                HierarchicalLifetimeManager());
             currentContainer.RegisterType<ClientLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<CookLogic>(new 

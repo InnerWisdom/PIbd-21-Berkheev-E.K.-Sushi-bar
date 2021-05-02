@@ -11,10 +11,17 @@ namespace SushiBarBusinessLogic.BusinessLogics
     {
         private readonly IOrderStorage _orderStorage;
 
+        private readonly ISushiStorage _sushiStorage;
+
+        private readonly IKitchenStorage _kitchenStorage;
+
         private readonly object locker = new object();
-        public OrderLogic(IOrderStorage orderStorage)
+        public OrderLogic(IOrderStorage orderStorage, ISushiStorage sushiStorage,
+            IKitchenStorage kitchenStorage)
         {
             _orderStorage = orderStorage;
+            _kitchenStorage = kitchenStorage;
+            _sushiStorage = sushiStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel sample)
         {
@@ -61,6 +68,14 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 {
                     throw new Exception("У заказа уже есть исполнитель");
                 }
+
+                var sushi = _sushiStorage.GetElement(new SushiBindingModel
+                {
+                    Id = order.SushiId
+                });
+
+                _kitchenStorage.CheckAndWriteOff(sushi, order.Count);
+
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
