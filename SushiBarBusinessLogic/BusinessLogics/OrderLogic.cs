@@ -10,9 +10,17 @@ namespace SushiBarBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
-        public OrderLogic(IOrderStorage orderStorage)
+
+        private readonly ISushiStorage _sushiStorage;
+
+        private readonly IKitchenStorage _kitchenStorage;
+
+        public OrderLogic(IOrderStorage orderStorage, ISushiStorage sushiStorage,
+            IKitchenStorage kitchenStorage)
         {
             _orderStorage = orderStorage;
+            _kitchenStorage = kitchenStorage;
+            _sushiStorage = sushiStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel sample)
         {
@@ -53,6 +61,13 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
+
+            var sushi = _sushiStorage.GetElement(new SushiBindingModel
+            {
+                Id = order.SushiId
+            });
+
+            _kitchenStorage.CheckAndWriteOff(sushi, order.Count);
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
