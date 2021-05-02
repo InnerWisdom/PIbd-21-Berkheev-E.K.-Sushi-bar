@@ -13,5 +13,7 @@ namespace SushiBarBusinessLogic.Enums
         Готов = 2,
 
         Оплачен = 3,
+
+        НужныИнгредиенты = 4
     }
 }

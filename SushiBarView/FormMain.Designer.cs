@@ -56,7 +56,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
             this.toolStripDropDownButtonReports,
-            this.toolStripDropDownButtonFillKitchen}),
+            this.toolStripDropDownButtonFillKitchen,
             this.toolStripButtonStartWork});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -70,7 +70,7 @@
             this.toolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.КомпонентыToolStripMenuItem,
             this.ИзделияToolStripMenuItem,
-            this.кухниToolStripMenuItem});
+            this.кухниToolStripMenuItem,
             this.клиентыToolStripMenuItem,
             this.повараToolStripMenuItem});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
@@ -257,7 +257,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-        }
+    }
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton;

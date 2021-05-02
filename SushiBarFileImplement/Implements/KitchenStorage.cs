@@ -181,5 +181,33 @@ namespace SushiBarFileImplement.Implements
                 }
             }
         }
+
+        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        {
+            foreach (var ingredient in ingredients)
+            {
+                int compCount = source.Kitchens.Where(wh => wh.KitchenIngredients.ContainsKey(ingredient.Key))
+                    .Sum(wh => wh.KitchenIngredients[ingredient.Key]);
+                if (compCount < (ingredient.Value.Item2 * count))
+                {
+                    return false;
+                }
+            }
+            foreach (var ingredient in ingredients)
+            {
+                int requiredCount = ingredient.Value.Item2 * count;
+                while (requiredCount > 0)
+                {
+                    var kitchen = source.Kitchens
+                        .FirstOrDefault(wh => wh.KitchenIngredients.ContainsKey(ingredient.Key)
+                        && wh.KitchenIngredients[ingredient.Key] > 0);
+                    int availableCount = kitchen.KitchenIngredients[ingredient.Key];
+                    requiredCount -= availableCount;
+                    kitchen.KitchenIngredients[ingredient.Key] = (requiredCount < 0) ? availableCount - (availableCount + requiredCount) : 0;
+                }
+            }
+            return true;
+        }
+
     }
 }

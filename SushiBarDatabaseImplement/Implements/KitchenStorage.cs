@@ -259,5 +259,42 @@ namespace SushiBarDatabaseImplement.Implements
 
             return kitchen;
         }
+
+        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        {
+            using (var context = new SushiBarDatabase())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (var ingredient in ingredients)
+                        {
+                            int requiredCount = ingredient.Value.Item2 * count;
+                            foreach (var kitchen in context.Kitchens.Include(rec => rec.KitchenIngredients))
+                            {
+                                int? availableCount = kitchen.KitchenIngredients.FirstOrDefault(rec => rec.IngredientId == ingredient.Key)?.Count;
+                                if (availableCount == null) { continue; }
+                                requiredCount -= (int)availableCount;
+                                kitchen.KitchenIngredients.FirstOrDefault(rec => rec.IngredientId == ingredient.Key).Count = (requiredCount < 0) ? (int)availableCount - ((int)availableCount + requiredCount) : 0;
+                            }
+                            if (requiredCount > 0)
+                            {
+                                return false;
+                            }
+                        }
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
     }
 }

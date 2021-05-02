@@ -49,6 +49,21 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
                 Thread.Sleep(cook.PauseTime);
             }
+
+            var needMaterials = await Task.Run(() => _orderStorage.GetFilteredList(new OrderBindingModel
+            { CookId = cook.Id, Status = Enums.OrderStatus.НужныИнгредиенты }));
+            foreach (var order in needMaterials)
+            {
+                // делаем работу заново
+                Thread.Sleep(cook.WorkingTime * rnd.Next(1, 5) * order.Count);
+                _orderLogic.FinishOrder(new ChangeStatusBindingModel
+                {
+                    OrderId = order.Id
+                });
+                // отдыхаем
+                Thread.Sleep(cook.PauseTime);
+            }
+
             await Task.Run(() =>
             {
                 foreach (var order in orders)

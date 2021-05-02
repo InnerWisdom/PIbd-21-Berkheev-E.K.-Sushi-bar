@@ -178,5 +178,9 @@ namespace SushiBarListImplement.Implements
         {
             throw new NotImplementedException();
         }
+        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

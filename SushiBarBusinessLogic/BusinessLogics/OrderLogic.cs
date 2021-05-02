@@ -51,31 +51,29 @@ namespace SushiBarBusinessLogic.BusinessLogics
         {
             lock (locker)
             {
+
+                OrderStatus status = OrderStatus.Выполняется;
                 var order = _orderStorage.GetElement(new OrderBindingModel
                 {
                     Id = model.OrderId
                 });
                 if (order == null)
                 {
-                    throw new Exception("Не найден заказ");
+                    throw new Exception("Заказ не найден");
                 }
                 if (order.Status != OrderStatus.Принят)
                 {
-                    throw new Exception("Заказ не в статусе \"Принят\"");
+                    throw new Exception("Заказ не в статусе \"принят\"");
                 }
-
+                var car = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
+                if (!_kitchenStorage.CheckIngredientsCount(order.Count, car.SushiIngredients))
+                {
+                    status = OrderStatus.НужныИнгредиенты;
+                }
                 if (order.CookId.HasValue)
                 {
-                    throw new Exception("У заказа уже есть исполнитель");
+                    throw new Exception("Order already has implementer");
                 }
-
-                var sushi = _sushiStorage.GetElement(new SushiBindingModel
-                {
-                    Id = order.SushiId
-                });
-
-                _kitchenStorage.CheckAndWriteOff(sushi, order.Count);
-
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
@@ -85,9 +83,10 @@ namespace SushiBarBusinessLogic.BusinessLogics
                     Count = order.Count,
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
-                    DateImplement = order.DateImplement,
-                    Status = OrderStatus.Выполняется
-                }); ;
+                    Status = status
+                });
+
+         
             }
                 
         }
@@ -101,6 +100,15 @@ namespace SushiBarBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Не найден заказ");
+            }
+            if (order.Status == OrderStatus.НужныИнгредиенты)
+            {
+                order.Status = OrderStatus.Выполняется;
+            }
+            var sushi = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
+            if (!_kitchenStorage.CheckIngredientsCount(order.Count, sushi.SushiIngredients))
+            {
+                return;
             }
             if (order.Status != OrderStatus.Выполняется)
             {
