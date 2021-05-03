@@ -87,56 +87,7 @@ namespace SushiBarDatabaseImplement.Implements
                     null;
             }
         }
-        public void CheckAndWriteOff(SushiViewModel model, int sushiCountInOrder)
-        {
-            using (var context = new SushiBarDatabase())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-
-                    foreach (var ingredientInSushi in model.SushiIngredients)
-                    {
-                        int ingredientCountInSushi = ingredientInSushi.Value.Item2 * sushiCountInOrder;
-
-                        List<KitchenIngredient> certainIngredients = context.KitchenIngredients
-                            .Where(kitchen => kitchen.IngredientId == ingredientInSushi.Key)
-                            .ToList();
-
-                        foreach (var ingredient in certainIngredients)
-                        {
-                            int ingredientCountInKitchen = ingredient.Count;
-
-                            if (ingredientCountInKitchen <= ingredientCountInSushi)
-                            {
-                                ingredientCountInSushi -= ingredientCountInKitchen;
-                                context.Kitchens.FirstOrDefault(rec => rec.Id == ingredient.KitchenId).KitchenIngredients.Remove(ingredient);
-                            }
-                            else
-                            {
-                                ingredient.Count -= ingredientCountInSushi;
-                                ingredientCountInSushi = 0;
-                            }
-
-                            if (ingredientCountInSushi == 0)
-                            {
-                                break;
-                            }
-                        }
-
-                        if (ingredientCountInSushi > 0)
-                        {
-                            transaction.Rollback();
-
-                            throw new Exception("Не хватает ингредиентов для суши!");
-                        }
-                    }
-
-                    context.SaveChanges();
-
-                    transaction.Commit();
-                }
-            }
-        }
+       
         public void Insert(KitchenBindingModel model)
         {
             using (var context = new SushiBarDatabase())

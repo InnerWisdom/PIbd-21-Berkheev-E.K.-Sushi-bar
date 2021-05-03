@@ -136,51 +136,6 @@ namespace SushiBarFileImplement.Implements
             }
         }
 
-        public void CheckAndWriteOff(SushiViewModel model, int printedProductCountInOrder)
-        {
-            foreach (var ingredientInSushi in model.SushiIngredients)
-            {
-                int ingredientCount = source.Kitchens
-                        .Sum(kitchen => kitchen.KitchenIngredients
-                        .FirstOrDefault(ingredient => ingredient.Key == ingredientInSushi.Key).Value);
-
-                if (ingredientCount < ingredientInSushi.Value.Item2 * printedProductCountInOrder)
-                {
-                    throw new Exception("Не хватает ингредиентов для суши!");
-                }
-            }
-
-            foreach (var ingredientInSushi in model.SushiIngredients)
-            {
-                int ingredientCountInSushi = ingredientInSushi.Value.Item2 * printedProductCountInOrder;
-
-                List<Kitchen> certainKitchens = source.Kitchens
-                    .Where(kitchen => kitchen.KitchenIngredients
-                    .ContainsKey(ingredientInSushi.Key))
-                    .ToList();
-
-                foreach (var storehouse in certainKitchens)
-                {
-                    int ingredientCountInKitchen = storehouse.KitchenIngredients[ingredientInSushi.Key];
-
-                    if (ingredientCountInKitchen <= ingredientCountInSushi)
-                    {
-                        ingredientCountInSushi -= ingredientCountInKitchen;
-                        storehouse.KitchenIngredients.Remove(ingredientInSushi.Key);
-                    }
-                    else
-                    {
-                        storehouse.KitchenIngredients[ingredientInSushi.Key] -= ingredientCountInSushi;
-                        ingredientCountInSushi = 0;
-                    }
-
-                    if (ingredientCountInSushi == 0)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
 
         public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
         {
