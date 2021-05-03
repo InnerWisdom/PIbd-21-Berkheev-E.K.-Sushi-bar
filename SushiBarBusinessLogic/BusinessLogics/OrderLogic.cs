@@ -65,8 +65,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 {
                     throw new Exception("Заказ не в статусе \"принят\"");
                 }
-                var car = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
-                if (!_kitchenStorage.CheckIngredientsCount(order.Count, car.SushiIngredients))
+                var sushi = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
+                if (!_kitchenStorage.CheckIngredientsCount(order.Count, sushi.SushiIngredients))
                 {
                     status = OrderStatus.НужныИнгредиенты;
                 }
