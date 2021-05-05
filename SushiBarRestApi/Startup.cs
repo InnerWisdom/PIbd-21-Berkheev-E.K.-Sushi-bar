@@ -39,7 +39,7 @@ namespace SushiBarRestApi
                 SmtpClientHost = "smtp.gmail.com",
                 SmtpClientPort = 587,
                 MailLogin = "iamthewisdom8@gmail.com",
-                MailPassword = "1772444Aa?!",
+                MailPassword = "1772444Aa?!!",
             });
 
         }
