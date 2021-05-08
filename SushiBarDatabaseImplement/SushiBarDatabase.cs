@@ -19,5 +19,6 @@ namespace SushiBarDatabaseImplement
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Kitchen> Kitchens { set; get; }
         public virtual DbSet<KitchenIngredient> KitchenIngredients { set; get; }
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

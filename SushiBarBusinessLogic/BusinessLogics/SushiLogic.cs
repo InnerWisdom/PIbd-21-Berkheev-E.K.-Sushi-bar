@@ -22,8 +22,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             }
             if (model.Id.HasValue)
             {
-                return new List<SushiViewModel> { _sushiStorage.GetElement(model)
-};
+                return new List<SushiViewModel> { _sushiStorage.GetElement(model)};
             }
             return _sushiStorage.GetFilteredList(model);
         }

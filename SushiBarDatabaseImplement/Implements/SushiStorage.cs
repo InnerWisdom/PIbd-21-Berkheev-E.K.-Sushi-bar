@@ -15,12 +15,17 @@ namespace SushiBarDatabaseImplement.Implements
         {
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                return context.Sushis.Include(rec => rec.SushiIngredients).ThenInclude(rec => rec.Ingredient).ToList().Select(rec => new SushiViewModel
+                return context.Sushis
+                .Include(rec => rec.SushiIngredients)
+                .ThenInclude(rec => rec.Ingredient).ToList()
+                .Select(rec => new SushiViewModel
                 {
                     Id = rec.Id,
                     SushiName = rec.SushiName,
                     Price = rec.Price,
-                    SushiIngredients = rec.SushiIngredients.ToDictionary(recPC => recPC.IngredientId, recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
+                    SushiIngredients = rec.SushiIngredients
+                .ToDictionary(recCC => recCC.IngredientId, recCC =>
+                (recCC.Ingredient?.IngredientName, recCC.Count))
                 }).ToList();
             }
         }
@@ -32,13 +37,16 @@ namespace SushiBarDatabaseImplement.Implements
             }
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                return context.Sushis.Include(rec => rec.SushiIngredients).ThenInclude(rec => rec.Ingredient)
+                return context.Sushis
+                    .Include(rec => rec.SushiIngredients)
+                    .ThenInclude(rec => rec.Ingredient)
                 .Where(rec => rec.SushiName.Contains(model.SushiName)).ToList().Select(rec => new SushiViewModel
                 {
                     Id = rec.Id,
                     SushiName = rec.SushiName,
                     Price = rec.Price,
-                    SushiIngredients = rec.SushiIngredients.ToDictionary(recPC => recPC.IngredientId, recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
+                   SushiIngredients = rec.SushiIngredients
+                .ToDictionary(recCC => recCC.IngredientId, recCC => (recCC.Ingredient?.IngredientName, recCC.Count))
                 }).ToList();
             }
         }
@@ -50,14 +58,17 @@ namespace SushiBarDatabaseImplement.Implements
             }
             using (SushiBarDatabase context = new SushiBarDatabase())
             {
-                Sushi sushi = context.Sushis.Include(rec => rec.SushiIngredients).ThenInclude(rec => rec.Ingredient)
+                Sushi sushi = context.Sushis
+                    .Include(rec => rec.SushiIngredients)
+                    .ThenInclude(rec => rec.Ingredient)
                 .FirstOrDefault(rec => rec.SushiName == model.SushiName || rec.Id == model.Id);
                 return sushi != null ? new SushiViewModel
                 {
                     Id = sushi.Id,
                     SushiName = sushi.SushiName,
                     Price = sushi.Price,
-                    SushiIngredients = sushi.SushiIngredients.ToDictionary(recPC => recPC.IngredientId, recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
+                    SushiIngredients = sushi.SushiIngredients.ToDictionary(recPC => recPC.IngredientId, 
+                    recPC => (recPC.Ingredient?.IngredientName, recPC.Count))
                 } : null;
             }
         }
@@ -69,11 +80,7 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     try
                     {
-                        Sushi r = new Sushi
-                        {
-                            SushiName = model.SushiName,
-                            Price = model.Price
-                        };
+                        var r = CreateModel(model, new Sushi());
                         context.Sushis.Add(r);
                         context.SaveChanges();
                         CreateModel(model, r, context);
@@ -129,24 +136,31 @@ namespace SushiBarDatabaseImplement.Implements
                 }
             }
         }
+
+        private Sushi CreateModel(SushiBindingModel model, Sushi sushi)
+        {
+            sushi.SushiName = model.SushiName;
+            sushi.Price = model.Price;
+            return sushi;
+        }
+
         private Sushi CreateModel(SushiBindingModel model, Sushi sushi, SushiBarDatabase context)
         {
+            sushi.SushiName = model.SushiName;
+            sushi.Price = model.Price;
             if (model.Id.HasValue)
             {
-                List<SushiIngredient> sushiIngredients = context.SushiIngredients.Where(rec => rec.SushiId == model.Id.Value).ToList();
-                // удалили те, которых нет в модели
+                var sushiIngredients = context.SushiIngredients.Where(rec => rec.SushiId == model.Id.Value).ToList();
                 context.SushiIngredients.RemoveRange(sushiIngredients.Where(rec => !model.SushiIngredients.ContainsKey(rec.IngredientId)).ToList());
                 context.SaveChanges();
-                // обновили количество у существующих записей
-                foreach (SushiIngredient updateIngredient in sushiIngredients)
+                foreach (var updateIngredient in sushiIngredients)
                 {
                     updateIngredient.Count = model.SushiIngredients[updateIngredient.IngredientId].Item2;
                     model.SushiIngredients.Remove(updateIngredient.IngredientId);
                 }
                 context.SaveChanges();
             }
-            // добавили новые
-            foreach (KeyValuePair<int, (string, int)> pc in model.SushiIngredients)
+            foreach (var pc in model.SushiIngredients)
             {
                 context.SushiIngredients.Add(new SushiIngredient
                 {
@@ -154,8 +168,9 @@ namespace SushiBarDatabaseImplement.Implements
                     IngredientId = pc.Key,
                     Count = pc.Value.Item2
                 });
-                context.SaveChanges();
+
             }
+            context.SaveChanges();
             return sushi;
         }
     }

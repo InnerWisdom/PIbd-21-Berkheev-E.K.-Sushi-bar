@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarListImplement", "Su
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarFileImplement", "SushiBarFileImplement\SushiBarFileImplement.csproj", "{EE15EED5-EAAA-417C-938A-19D567607BA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SushiBarDatabaseImplement", "SushiBarDatabaseImplement\SushiBarDatabaseImplement.csproj", "{BEFED345-696A-48D6-A69E-18BD1826668C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarDatabaseImplement", "SushiBarDatabaseImplement\SushiBarDatabaseImplement.csproj", "{BEFED345-696A-48D6-A69E-18BD1826668C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarRestApi", "SushiBarRestApi\SushiBarRestApi.csproj", "{43F66B60-6286-477F-ACF6-15E4445583FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarClientApp", "SushiBarClientApp\SushiBarClientApp.csproj", "{9D303340-E100-4EF9-B4C2-33C65D0688E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SushiBarCookEmployeeApp", "SushiBarCookEmpoloyeeApp\SushiBarCookEmployeeApp.csproj", "{A8D6C4F7-72E8-487F-846D-C4768227CC52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +46,19 @@ Global
 		{BEFED345-696A-48D6-A69E-18BD1826668C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEFED345-696A-48D6-A69E-18BD1826668C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEFED345-696A-48D6-A69E-18BD1826668C}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{43F66B60-6286-477F-ACF6-15E4445583FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43F66B60-6286-477F-ACF6-15E4445583FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43F66B60-6286-477F-ACF6-15E4445583FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43F66B60-6286-477F-ACF6-15E4445583FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D303340-E100-4EF9-B4C2-33C65D0688E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D303340-E100-4EF9-B4C2-33C65D0688E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D303340-E100-4EF9-B4C2-33C65D0688E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D303340-E100-4EF9-B4C2-33C65D0688E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D6C4F7-72E8-487F-846D-C4768227CC52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D6C4F7-72E8-487F-846D-C4768227CC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D6C4F7-72E8-487F-846D-C4768227CC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D6C4F7-72E8-487F-846D-C4768227CC52}.Release|Any CPU.Build.0 = Release|Any CPU
 
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

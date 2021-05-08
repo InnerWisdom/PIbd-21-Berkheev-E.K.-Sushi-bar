@@ -16,12 +16,16 @@ namespace SushiBarListImplement
         public List<Kitchen> Kitchens { get; set; }
 
 
+
+        public List<Client> Clients { get; set; }
+
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
             Orders = new List<Order>();
             Sushis = new List<Sushi>();
             Kitchens = new List<Kitchen>();
+            Clients = new List<Client>();
         }
         
         public static DataListSingleton GetInstance()
