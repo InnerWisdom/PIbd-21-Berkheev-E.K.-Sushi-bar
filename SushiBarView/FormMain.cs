@@ -1,10 +1,7 @@
 ﻿using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
-using SushiBarBusinessLogic.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Linq;
 using Unity;
 namespace SushiBarView
 {
@@ -37,6 +34,8 @@ namespace SushiBarView
                     DataGridView.Columns[0].Visible = false;
 
                     DataGridView.Columns[1].Visible = false;
+                    DataGridView.Columns[2].Visible = false;
+                    DataGridView.Columns[3].Visible = false;
 
                 }
             }
@@ -62,47 +61,7 @@ namespace SushiBarView
             form.ShowDialog();
             LoadData();
         }
-        private void ButtonTakeOrderInWork_Click(object sender, EventArgs e)
-        {
-            if (DataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(DataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel
-                    {
-                        OrderId =
-                   id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void ButtonOrderReady_Click(object sender, EventArgs e)
-        {
-            if (DataGridView.SelectedRows.Count == 1)
-            {
-                int id = Convert.ToInt32(DataGridView.SelectedRows[0].Cells[0].Value);
-                try
-                {
-                    _orderLogic.FinishOrder(new ChangeStatusBindingModel
-                    {
-                        OrderId = id
-                    });
-                    LoadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
-                }
-            }
-        }
+        
         private void ButtonPayOrder_Click(object sender, EventArgs e)
         {
             if (DataGridView.SelectedRows.Count == 1)
@@ -159,6 +118,20 @@ namespace SushiBarView
         {
             var form = Container.Resolve<FormClients>();
             form.ShowDialog();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormCooks>();
+            form.ShowDialog();
+        }
+
+        private void toolStripButtonStartWork_Click(object sender, EventArgs e)
+        {
+            var workModeling = Container.Resolve<WorkModeling>();
+            workModeling.DoWork();
+            MessageBox.Show("Работы запущены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
         }
     }
 }

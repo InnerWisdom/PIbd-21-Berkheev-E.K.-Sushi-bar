@@ -9,6 +9,8 @@ namespace SushiBarListImplement.Models
 
         public int SushiId { get; set; }
 
+        public int ClientId { get; set; }
+        public int? CookId { get; set; }
         public int Count { get; set; }
         
         public decimal Sum { get; set; }
