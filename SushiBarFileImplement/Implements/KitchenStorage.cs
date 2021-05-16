@@ -137,28 +137,42 @@ namespace SushiBarFileImplement.Implements
         }
 
 
-        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        public bool CheckIngredientsCount(int orderID)
         {
-            foreach (var ingredient in ingredients)
+            foreach (var ingredient in source.Sushis.FirstOrDefault(rec => rec.Id == source.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).SushiIngredients)
             {
-                int compCount = source.Kitchens.Where(wh => wh.KitchenIngredients.ContainsKey(ingredient.Key))
-                    .Sum(wh => wh.KitchenIngredients[ingredient.Key]);
-                if (compCount < (ingredient.Value.Item2 * count))
+                int count = ingredient.Value * source.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+                foreach (Kitchen kitchen in source.Kitchens)
+                {
+                    if (kitchen.KitchenIngredients.ContainsKey(ingredient.Key))
+                    {
+                        count -= kitchen.KitchenIngredients[ingredient.Key];
+                    }
+                }
+                if (count > 0)
                 {
                     return false;
                 }
             }
-            foreach (var ingredient in ingredients)
+
+            foreach (var ingredient in source.Sushis.FirstOrDefault(rec => rec.Id == source.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).SushiIngredients)
             {
-                int requiredCount = ingredient.Value.Item2 * count;
-                while (requiredCount > 0)
+                int count = ingredient.Value * source.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+                foreach (Kitchen kitchen in source.Kitchens)
                 {
-                    var kitchen = source.Kitchens
-                        .FirstOrDefault(wh => wh.KitchenIngredients.ContainsKey(ingredient.Key)
-                        && wh.KitchenIngredients[ingredient.Key] > 0);
-                    int availableCount = kitchen.KitchenIngredients[ingredient.Key];
-                    requiredCount -= availableCount;
-                    kitchen.KitchenIngredients[ingredient.Key] = (requiredCount < 0) ? availableCount - (availableCount + requiredCount) : 0;
+                    if (kitchen.KitchenIngredients.ContainsKey(ingredient.Key))
+                    {
+                        if (kitchen.KitchenIngredients[ingredient.Key] > count)
+                        {
+                            kitchen.KitchenIngredients[ingredient.Key] -= count;
+                            break;
+                        }
+                        else
+                        {
+                            count -= kitchen.KitchenIngredients[ingredient.Key];
+                            kitchen.KitchenIngredients[ingredient.Key] = 0;
+                        }
+                    }
                 }
             }
             return true;

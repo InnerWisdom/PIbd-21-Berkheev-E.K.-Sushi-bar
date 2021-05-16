@@ -46,7 +46,9 @@ namespace SushiBarBusinessLogic.BusinessLogics
             foreach (var order in runOrders)
             {
                 Thread.Sleep(cook.WorkingTime * rnd.Next(1, 5) * order.Count);
-                _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
+                _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id,
+                    CookId = cook.Id
+                });
                 Thread.Sleep(cook.PauseTime);
             }
 
@@ -58,7 +60,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 Thread.Sleep(cook.WorkingTime * rnd.Next(1, 5) * order.Count);
                 _orderLogic.FinishOrder(new ChangeStatusBindingModel
                 {
-                    OrderId = order.Id
+                    OrderId = order.Id,
+                    CookId= cook.Id
                 });
                 // отдыхаем
                 Thread.Sleep(cook.PauseTime);
@@ -73,7 +76,9 @@ namespace SushiBarBusinessLogic.BusinessLogics
                     {
                         _orderLogic.TakeOrderInWork(new ChangeStatusBindingModel { OrderId = order.Id, CookId = cook.Id });
                         Thread.Sleep(cook.WorkingTime * rnd.Next(1, 5) * order.Count);
-                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
+                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id,
+                            CookId = cook.Id
+                        });
                         Thread.Sleep(cook.PauseTime);
                     }
                     catch (Exception) { }

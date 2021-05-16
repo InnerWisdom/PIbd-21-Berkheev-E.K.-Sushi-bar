@@ -19,6 +19,6 @@ namespace SushiBarBusinessLogic.Interfaces
         void Update(KitchenBindingModel model);
 
         void Delete(KitchenBindingModel model);
-        bool CheckIngredientsCount(int count, Dictionary<int, (string,int)> ingredients);
+        bool CheckIngredientsCount(int orderID);
     }
 }

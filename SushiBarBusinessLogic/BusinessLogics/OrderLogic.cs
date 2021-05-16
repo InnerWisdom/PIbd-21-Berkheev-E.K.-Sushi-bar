@@ -65,8 +65,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 {
                     throw new Exception("Заказ не в статусе \"принят\"");
                 }
-                var sushi = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
-                if (!_kitchenStorage.CheckIngredientsCount(order.Count, sushi.SushiIngredients))
+                if (!_kitchenStorage.CheckIngredientsCount(model.OrderId))
                 {
                     status = OrderStatus.НужныИнгредиенты;
                 }
@@ -83,6 +82,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
                     Count = order.Count,
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
                     Status = status
                 });
 
@@ -101,14 +101,9 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
-            if (order.Status == OrderStatus.НужныИнгредиенты)
+            if (order.Status == OrderStatus.НужныИнгредиенты && _kitchenStorage.CheckIngredientsCount(model.OrderId))
             {
                 order.Status = OrderStatus.Выполняется;
-            }
-            var sushi = _sushiStorage.GetElement(new SushiBindingModel { Id = order.SushiId });
-            if (!_kitchenStorage.CheckIngredientsCount(order.Count, sushi.SushiIngredients))
-            {
-                return;
             }
             if (order.Status != OrderStatus.Выполняется)
             {
@@ -149,6 +144,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
+                CookId=order.CookId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,

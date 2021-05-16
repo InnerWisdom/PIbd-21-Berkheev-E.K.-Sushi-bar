@@ -174,7 +174,7 @@ namespace SushiBarListImplement.Implements
                 }
             }
         }
-        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        public bool CheckIngredientsCount(int orderID)
         {
             throw new NotImplementedException();
         }

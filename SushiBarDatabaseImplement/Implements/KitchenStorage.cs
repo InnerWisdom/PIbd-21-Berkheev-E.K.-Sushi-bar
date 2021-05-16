@@ -87,7 +87,7 @@ namespace SushiBarDatabaseImplement.Implements
                     null;
             }
         }
-       
+
         public void Insert(KitchenBindingModel model)
         {
             using (var context = new SushiBarDatabase())
@@ -211,7 +211,7 @@ namespace SushiBarDatabaseImplement.Implements
             return kitchen;
         }
 
-        public bool CheckIngredientsCount(int count, Dictionary<int, (string, int)> ingredients)
+        public bool CheckIngredientsCount(int orderID)
         {
             using (var context = new SushiBarDatabase())
             {
@@ -219,33 +219,44 @@ namespace SushiBarDatabaseImplement.Implements
                 {
                     try
                     {
-                        foreach (var ingredient in ingredients)
+                        var SushiId = context.Sushis.FirstOrDefault(rec => rec.Id == context.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).Id;
+                        var countOrders = context.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+
+                        foreach (var component in context.SushiIngredients.Where(rec => rec.SushiId == SushiId))
                         {
-                            int requiredCount = ingredient.Value.Item2 * count;
-                            foreach (var kitchen in context.Kitchens.Include(rec => rec.KitchenIngredients))
+                            int countIngredients = component.Count * countOrders;
+
+                            foreach (var kitchenIngredient in context.KitchenIngredients.Where(rec => rec.IngredientId == component.IngredientId))
                             {
-                                int? availableCount = kitchen.KitchenIngredients.FirstOrDefault(rec => rec.IngredientId == ingredient.Key)?.Count;
-                                if (availableCount == null) { continue; }
-                                requiredCount -= (int)availableCount;
-                                kitchen.KitchenIngredients.FirstOrDefault(rec => rec.IngredientId == ingredient.Key).Count = (requiredCount < 0) ? (int)availableCount - ((int)availableCount + requiredCount) : 0;
+                                if (kitchenIngredient.Count > countIngredients)
+                                {
+                                    kitchenIngredient.Count -= countIngredients;
+                                    countIngredients = 0;
+                                    break;
+                                }
+                                else
+                                {
+                                    countIngredients -= kitchenIngredient.Count;
+                                    kitchenIngredient.Count = 0;
+                                }
                             }
-                            if (requiredCount > 0)
+                            if (countIngredients > 0)
                             {
+                                transaction.Rollback();
                                 return false;
                             }
                         }
                         context.SaveChanges();
                         transaction.Commit();
+                        return true;
                     }
                     catch (Exception)
                     {
                         transaction.Rollback();
-                        return false;
+                        throw new Exception("На складе нет необходимых компонентов");
                     }
                 }
             }
-            return true;
         }
-
     }
 }
