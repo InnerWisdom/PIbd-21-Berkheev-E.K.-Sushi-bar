@@ -37,10 +37,10 @@ namespace SushiBarBusinessLogic.ViewModels
         [Column(title: "Status", gridViewAutoSize: GridViewAutoSize.Fill)]
         public OrderStatus Status { get; set; }
         [DataMember]
-        [Column(title: "Creation date", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Creation date", gridViewAutoSize: GridViewAutoSize.Fill, format: "R")]
         public DateTime DateCreate { get; set; }
         [DataMember]
-        [Column(title: "Implementatation date", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Implementatation date", gridViewAutoSize: GridViewAutoSize.Fill, format: "R")]
         public DateTime? DateImplement { get; set; }
     }
 }

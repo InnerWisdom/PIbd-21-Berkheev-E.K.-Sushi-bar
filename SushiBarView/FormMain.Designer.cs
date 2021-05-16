@@ -40,7 +40,6 @@
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.toolStripButtonFillKitchen = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButtonFillKitchen = new System.Windows.Forms.ToolStripDropDownButton();
             this.списокКухоньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ингредиентыПоСкладамToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,15 +212,6 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // toolStripButtonFillKitchen
-            // 
-            this.toolStripButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonFillKitchen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonFillKitchen.Name = "toolStripButtonFillKitchen";
-            this.toolStripButtonFillKitchen.Size = new System.Drawing.Size(113, 22);
-            this.toolStripButtonFillKitchen.Text = "Заполнение кухни";
-            this.toolStripButtonFillKitchen.ToolTipText = "toolStripButtonFillKitchen";
-            // 
             // toolStripDropDownButtonFillKitchen
             // 
             this.toolStripDropDownButtonFillKitchen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -312,7 +302,6 @@
         private System.Windows.Forms.ToolStripMenuItem компонентыПоИзделиямToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem списокЗаказовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem кухниToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButtonFillKitchen;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButtonFillKitchen;
         private System.Windows.Forms.ToolStripMenuItem списокКухоньToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ингредиентыПоСкладамToolStripMenuItem;

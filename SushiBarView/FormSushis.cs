@@ -1,5 +1,7 @@
 ﻿using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
+using SushiBarBusinessLogic.ViewModels;
+using System.Reflection;
 using System;
 using System.Windows.Forms;
 using Unity;
@@ -24,7 +26,10 @@ namespace SushiBarView
         {
             try
             {
-                Program.ConfigGrid(logic.Read(null), dataGridView);
+
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo generic = method.MakeGenericMethod(typeof(SushiViewModel));
+                generic.Invoke(this, new object[] { logic.Read(null), dataGridView });
             }
             catch (Exception ex)
             {

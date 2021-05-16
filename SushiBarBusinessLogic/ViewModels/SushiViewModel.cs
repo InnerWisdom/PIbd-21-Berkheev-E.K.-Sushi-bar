@@ -1,5 +1,4 @@
-﻿
-using SushiBarBusinessLogic.Attributes;
+﻿using SushiBarBusinessLogic.Attributes;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
