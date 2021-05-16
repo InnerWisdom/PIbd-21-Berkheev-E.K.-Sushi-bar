@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Windows.Forms;
 using SushiBarBusinessLogic.BusinessLogics;
+using SushiBarBusinessLogic.ViewModels;
 using SushiBarBusinessLogic.BindingModels;
+using System.Reflection;
 using Unity;
 
 namespace SushiBarView
@@ -29,19 +31,29 @@ namespace SushiBarView
         }
         private void LoadData()
         {
-            var list = logic.Read(new MessageInfoBindingModel { ToSkip = currentPage * mailsOnPage, ToTake = mailsOnPage + 1 });
-            hasNext = !(list.Count() <= mailsOnPage);
-            if (hasNext)
+            try
             {
-                buttonNext.Text = "Next " + (currentPage + 2);
-                buttonNext.Enabled = true;
+                var list = logic.Read(new MessageInfoBindingModel { ToSkip = currentPage * mailsOnPage, ToTake = mailsOnPage + 1 });
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo generic = method.MakeGenericMethod(typeof(MessageInfoViewModel));
+                hasNext = !(list.Count() <= mailsOnPage);
+                if (hasNext)
+                {
+                    buttonNext.Text = "Next " + (currentPage + 2);
+                    buttonNext.Enabled = true;
+                }
+                else
+                {
+                    buttonNext.Text = "Next";
+                    buttonNext.Enabled = false;
+                }
+                generic.Invoke(this, new object[] { list.Take(mailsOnPage).ToList(), dataGridView });
             }
-            else
+            catch (Exception ex)
             {
-                buttonNext.Text = "Next";
-                buttonNext.Enabled = false;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                  MessageBoxIcon.Error);
             }
-            Program.ConfigGrid(logic.Read(null), dataGridView);
         }
 
         private void buttonPrev_Click(object sender, EventArgs e)

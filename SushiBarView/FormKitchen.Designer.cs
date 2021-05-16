@@ -34,10 +34,10 @@ namespace SushiBarView
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.textBoxPerson = new System.Windows.Forms.TextBox();
             this.DataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
@@ -93,16 +93,6 @@ namespace SushiBarView
             this.DataGridView.Size = new System.Drawing.Size(354, 252);
             this.DataGridView.TabIndex = 8;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.DataGridView);
-            this.groupBox1.Location = new System.Drawing.Point(52, 95);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(476, 280);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ингредиенты";
-            // 
             // ColumnId
             // 
             this.ColumnId.HeaderText = "Id";
@@ -120,6 +110,16 @@ namespace SushiBarView
             // 
             this.ColumnCount.HeaderText = "Количество";
             this.ColumnCount.Name = "ColumnCount";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.DataGridView);
+            this.groupBox1.Location = new System.Drawing.Point(52, 95);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(476, 280);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Ингредиенты";
             // 
             // ButtonCancel
             // 
@@ -154,7 +154,7 @@ namespace SushiBarView
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FormKitchen";
-            this.Text = "FormKitchen";
+            this.Text = "Кухня";
             this.Load += new System.EventHandler(this.FormKitchen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);

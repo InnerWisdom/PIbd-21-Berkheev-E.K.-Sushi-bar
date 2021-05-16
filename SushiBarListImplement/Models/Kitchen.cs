@@ -6,7 +6,7 @@ namespace SushiBarListImplement.Models
 {
     public class Kitchen
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string KitchenName { get; set; }
 

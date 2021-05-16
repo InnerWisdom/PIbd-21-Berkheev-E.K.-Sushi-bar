@@ -7,7 +7,8 @@ namespace SushiBarBusinessLogic.ViewModels
 {
     public class KitchenViewModel
     {
-        public int? Id { get; set; }
+        [Column(title: "Number", gridViewAutoSize: GridViewAutoSize.Fill)]
+        public int Id { get; set; }
 
         [DisplayName("Название кухни")]
         [Column(title: "Название кухни", gridViewAutoSize: GridViewAutoSize.Fill)]
@@ -18,7 +19,7 @@ namespace SushiBarBusinessLogic.ViewModels
         public string ResponsiblePersonFullName { get; set; }
 
         [DisplayName("Дата создания кухни")]
-        [Column(title: "Дата создания кухни", width: 100, format: "D")]
+        [Column(title: "Дата создания кухни", width: 250, format: "D")]
         public DateTime DateCreate { get; set; }
 
         public Dictionary<int, (string, int)> KitchenIngredients { get; set; }

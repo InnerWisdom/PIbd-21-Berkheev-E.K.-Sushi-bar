@@ -39,7 +39,7 @@ namespace SushiBarView
             // 
             // ButtonRef
             // 
-            this.ButtonRef.Location = new System.Drawing.Point(530, 183);
+            this.ButtonRef.Location = new System.Drawing.Point(792, 180);
             this.ButtonRef.Name = "ButtonRef";
             this.ButtonRef.Size = new System.Drawing.Size(95, 35);
             this.ButtonRef.TabIndex = 9;
@@ -49,7 +49,7 @@ namespace SushiBarView
             // 
             // ButtonDel
             // 
-            this.ButtonDel.Location = new System.Drawing.Point(530, 133);
+            this.ButtonDel.Location = new System.Drawing.Point(792, 130);
             this.ButtonDel.Name = "ButtonDel";
             this.ButtonDel.Size = new System.Drawing.Size(95, 35);
             this.ButtonDel.TabIndex = 8;
@@ -59,7 +59,7 @@ namespace SushiBarView
             // 
             // ButtonUpd
             // 
-            this.ButtonUpd.Location = new System.Drawing.Point(530, 80);
+            this.ButtonUpd.Location = new System.Drawing.Point(792, 77);
             this.ButtonUpd.Name = "ButtonUpd";
             this.ButtonUpd.Size = new System.Drawing.Size(95, 35);
             this.ButtonUpd.TabIndex = 7;
@@ -69,7 +69,7 @@ namespace SushiBarView
             // 
             // ButtonAdd
             // 
-            this.ButtonAdd.Location = new System.Drawing.Point(530, 27);
+            this.ButtonAdd.Location = new System.Drawing.Point(792, 24);
             this.ButtonAdd.Name = "ButtonAdd";
             this.ButtonAdd.Size = new System.Drawing.Size(95, 35);
             this.ButtonAdd.TabIndex = 6;
@@ -83,26 +83,26 @@ namespace SushiBarView
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(12, 2);
+            this.dataGridView.Location = new System.Drawing.Point(42, 12);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(512, 445);
-            this.dataGridView.TabIndex = 5;
+            this.dataGridView.Size = new System.Drawing.Size(678, 445);
+            this.dataGridView.TabIndex = 10;
             // 
             // FormKitchens
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(640, 450);
+            this.ClientSize = new System.Drawing.Size(913, 450);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonRef);
             this.Controls.Add(this.ButtonDel);
             this.Controls.Add(this.ButtonUpd);
             this.Controls.Add(this.ButtonAdd);
-            this.Controls.Add(this.dataGridView);
             this.Name = "FormKitchens";
-            this.Text = "FormKitchens";
+            this.Text = "Кухни";
             this.Load += new System.EventHandler(this.FormKitchens_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
