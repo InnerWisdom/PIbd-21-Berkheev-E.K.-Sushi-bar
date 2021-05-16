@@ -112,8 +112,7 @@ namespace SushiBarView
             this.Controls.Add(this.dateTimePickerTo);
             this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormReportOrderByDate";
-            this.Text = "FormReportOrderByDate";
-            this.Load += new System.EventHandler(this.FormReportOrderByDate_Load);
+            this.Text = "Заказы по дате";
             this.ResumeLayout(false);
             this.PerformLayout();
 

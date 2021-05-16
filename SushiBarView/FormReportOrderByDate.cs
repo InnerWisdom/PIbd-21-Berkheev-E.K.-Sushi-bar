@@ -76,9 +76,5 @@ namespace SushiBarView
             }
         }
 
-        private void FormReportOrderByDate_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
