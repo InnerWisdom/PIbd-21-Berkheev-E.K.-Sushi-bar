@@ -23,13 +23,14 @@ namespace SushiBarClientApp.Controllers
             }
             return View(APIClient.GetRequest<List<OrderViewModel>>($"api/main/getorders?clientId={Program.Client.Id}"));
         }
-        public IActionResult Mail()
+        public IActionResult Mail(int page = 1)
         {
             if (Program.Client == null)
             {
                 return Redirect("~/Home/Enter");
             }
-            var model = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}");
+            var temp = APIClient.GetRequest<(List<MessageInfoViewModel> list, bool hasNext)>($"api/client/getmessages?clientId={Program.Client.Id}&page={page}");
+            (List<MessageInfoViewModel>, bool, int) model = (temp.list, temp.hasNext, page);
             return View(model);
         }
 
@@ -133,7 +134,6 @@ namespace SushiBarClientApp.Controllers
             {
                 return;
             }
-            var str = Program.Client.Id;
             //прописать запрос
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {

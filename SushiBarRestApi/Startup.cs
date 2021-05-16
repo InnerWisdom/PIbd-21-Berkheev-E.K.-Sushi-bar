@@ -28,8 +28,12 @@ namespace SushiBarRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ISushiStorage, SushiStorage>();
+            services.AddTransient<IKitchenStorage, KitchenStorage>();
+            services.AddTransient<IIngredientStorage, IngredientStorage>();
             services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
+            services.AddTransient<IngredientLogic>();
+            services.AddTransient<KitchenLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<SushiLogic>();
             services.AddTransient<MailLogic>();
@@ -39,7 +43,7 @@ namespace SushiBarRestApi
                 SmtpClientHost = "smtp.gmail.com",
                 SmtpClientPort = 587,
                 MailLogin = "iamthewisdom8@gmail.com",
-                MailPassword = "1772444Aa?!!",
+                MailPassword = "1771772444Aa?!!?",
             });
 
         }

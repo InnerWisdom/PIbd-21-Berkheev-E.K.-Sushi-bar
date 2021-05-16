@@ -1,0 +1,65 @@
+﻿@using SushiBarBusinessLogic.ViewModels
+@model List<KitchenViewModel>
+
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+    <div class="text-center">
+        <h1 class="display-4">Kitchens</h1>
+    </div>
+    <div class="text-center">
+        @{
+            if (Model == null)
+            {
+                <h3 class="display-4">Enter</h3>
+                return;
+            }
+            <p>
+                <a asp-action="Create">Create kitchen</a>
+            </p>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Num
+                        </th>
+                        <th>
+                            Kitchen name
+                        </th>
+                        <th>
+                            Responsible person
+                        </th>
+                        <th>
+                            Date Create
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KitchenName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ResponsiblePersonFullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreate)
+                            </td>
+                            <td>
+                                <a asp-action="Update" asp-route-kitchenId="@item.Id" asp-route-name="@item.KitchenName" asp-route-responsible="@item.ResponsiblePersonFullName">Update</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
