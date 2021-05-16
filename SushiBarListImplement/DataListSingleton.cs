@@ -13,6 +13,10 @@ namespace SushiBarListImplement
         
         public List<Sushi> Sushis { get; set; }
 
+        public List<Kitchen> Kitchens { get; set; }
+
+
+
         public List<Client> Clients { get; set; }
 
         public List<Cook> Cooks { get; set; }
@@ -23,6 +27,7 @@ namespace SushiBarListImplement
             Ingredients = new List<Ingredient>();
             Orders = new List<Order>();
             Sushis = new List<Sushi>();
+            Kitchens = new List<Kitchen>();
             Clients = new List<Client>();
             Cooks = new List<Cook>();
             Messages = new List<MessageInfo>();

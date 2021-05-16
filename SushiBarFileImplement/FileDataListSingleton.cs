@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using SushiBarBusinessLogic.Enums;
 using SushiBarFileImplement.Models;
+using System.Globalization;
 
 namespace SushiBarFileImplement
 {
@@ -18,6 +19,10 @@ namespace SushiBarFileImplement
 
         private readonly string SushiFileName = "Sushi.xml";
 
+
+        private readonly string KitchenFileName = "Kitchen.xml";
+
+
         private readonly string ClientFileName = "Client.xml";
 
         private readonly string MessageFileName = "Message.xml";
@@ -26,6 +31,8 @@ namespace SushiBarFileImplement
         public List<Order> Orders { get; set; }
 
         public List<Sushi> Sushis { get; set; }
+
+        public List<Kitchen> Kitchens { get; set; }
 
         public List<Client> Clients { get; set; }
 
@@ -37,6 +44,7 @@ namespace SushiBarFileImplement
             Ingredients = LoadIngredients();
             Orders = LoadOrders();
             Sushis = LoadSushis();
+            Kitchens = LoadKitchens();
             Clients = LoadClients();
             Cooks = new List<Cook>();
             Messages = LoadMessages();
@@ -56,6 +64,7 @@ namespace SushiBarFileImplement
             SaveIngredients();
             SaveOrders();
             SaveSushis();
+            SaveKitchens();
             SaveClients();
             SaveMessages();
         }
@@ -150,6 +159,69 @@ namespace SushiBarFileImplement
                 }
             }
             return list;
+        }
+
+        private List<Kitchen> LoadKitchens()
+        {
+            var list = new List<Kitchen>();
+
+            if (File.Exists(KitchenFileName))
+            {
+                XDocument xDocument = XDocument.Load(KitchenFileName);
+
+                var xElements = xDocument.Root.Elements("Kitchen").ToList();
+
+                foreach (var kitchen in xElements)
+                {
+                    var kitchenIngredients = new Dictionary<int, int>();
+
+                    foreach (var material in kitchen.Element("KitchenIngredients").Elements("KitchenIngredient").ToList())
+                    {
+                        kitchenIngredients.Add(Convert.ToInt32(material.Element("Key").Value), Convert.ToInt32(material.Element("Value").Value));
+                    }
+
+                    list.Add(new Kitchen
+                    {
+                        Id = Convert.ToInt32(kitchen.Attribute("Id").Value),
+                        KitchenName = kitchen.Element("KitchenName").Value,
+                        ResponsiblePersonFullName = kitchen.Element("ResponsiblePersonFullName").Value,
+                        DateCreate = Convert.ToDateTime(kitchen.Element("DateCreate").Value),
+                        KitchenIngredients = kitchenIngredients
+                    });
+                }
+            }
+
+            return list;
+        }
+
+        private void SaveKitchens()
+        {
+            if (Kitchens != null)
+            {
+                var xElement = new XElement("Kitchens");
+
+                foreach (var kitchen in Kitchens)
+                {
+                    var ingredientElement = new XElement("KitchenIngredients");
+
+                    foreach (var material in kitchen.KitchenIngredients)
+                    {
+                        ingredientElement.Add(new XElement("KitchenIngredient",
+                            new XElement("Key", material.Key),
+                            new XElement("Value", material.Value)));
+                    }
+
+                    xElement.Add(new XElement("Kitchen",
+                        new XAttribute("Id", kitchen.Id),
+                        new XElement("KitchenName", kitchen.KitchenName),
+                        new XElement("ResponsiblePersonFullName", kitchen.ResponsiblePersonFullName),
+                        new XElement("DateCreate", kitchen.DateCreate.ToString()),
+                        ingredientElement));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(KitchenFileName);
+            }
         }
 
         private void SaveIngredients()

@@ -12,12 +12,19 @@ namespace SushiBarBusinessLogic.BusinessLogics
     {
         private readonly IOrderStorage _orderStorage;
 
+        private readonly ISushiStorage _sushiStorage;
+
+        private readonly IKitchenStorage _kitchenStorage;
+
         private readonly IClientStorage _clientStorage;
 
         private readonly object locker = new object();
-        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
+        public OrderLogic(IOrderStorage orderStorage, ISushiStorage sushiStorage,
+            IKitchenStorage kitchenStorage, IClientStorage clientStorage)
         {
             _orderStorage = orderStorage;
+            _kitchenStorage = kitchenStorage;
+            _sushiStorage = sushiStorage;
             _clientStorage = clientStorage;
         }
         public List<OrderViewModel> Read(OrderBindingModel sample)
@@ -54,22 +61,27 @@ namespace SushiBarBusinessLogic.BusinessLogics
         {
             lock (locker)
             {
+
+                OrderStatus status = OrderStatus.Выполняется;
                 var order = _orderStorage.GetElement(new OrderBindingModel
                 {
                     Id = model.OrderId
                 });
                 if (order == null)
                 {
-                    throw new Exception("Не найден заказ");
+                    throw new Exception("Заказ не найден");
                 }
                 if (order.Status != OrderStatus.Принят)
                 {
-                    throw new Exception("Заказ не в статусе \"Принят\"");
+                    throw new Exception("Заказ не в статусе \"принят\"");
                 }
-
+                if (!_kitchenStorage.CheckIngredientsCount(model.OrderId))
+                {
+                    status = OrderStatus.НужныИнгредиенты;
+                }
                 if (order.CookId.HasValue)
                 {
-                    throw new Exception("У заказа уже есть исполнитель");
+                    throw new Exception("Order already has implementer");
                 }
                 _orderStorage.Update(new OrderBindingModel
                 {
@@ -81,7 +93,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
                     DateImplement = order.DateImplement,
-                    Status = OrderStatus.Выполняется
+                    Status = status
                 });
                 MailLogic.MailSendAsync(new MailSendInfo
                 {
@@ -102,6 +114,10 @@ namespace SushiBarBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Не найден заказ");
+            }
+            if (order.Status == OrderStatus.НужныИнгредиенты && _kitchenStorage.CheckIngredientsCount(model.OrderId))
+            {
+                order.Status = OrderStatus.Выполняется;
             }
             if (order.Status != OrderStatus.Выполняется)
             {
@@ -148,6 +164,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 Id = order.Id,
                 ClientId = order.ClientId,
+                CookId=order.CookId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,
