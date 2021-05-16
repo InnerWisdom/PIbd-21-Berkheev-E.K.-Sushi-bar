@@ -32,12 +32,10 @@
             this.ИзделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.кухниToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.повараToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButtonReports = new System.Windows.Forms.ToolStripDropDownButton();
             this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.списокЗаказовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButtonStartWork = new System.Windows.Forms.ToolStripButton();
             this.DataGridView = new System.Windows.Forms.DataGridView();
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonPayOrder = new System.Windows.Forms.Button();

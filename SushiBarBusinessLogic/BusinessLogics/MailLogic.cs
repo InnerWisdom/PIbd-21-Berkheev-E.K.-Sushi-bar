@@ -96,7 +96,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 return;
             }
-            if (info.Storage == null)
+            if (info.Storage == null || info.ClientStorage == null)
             {
                 return;
             }
