@@ -98,7 +98,7 @@ namespace SushiBarFileImplement.Implements
                 SushiId = order.SushiId,
                 SushiName = source.Sushis.FirstOrDefault(p => p.Id == order.SushiId)?.SushiName,
                 CookId = order.CookId,
-                CookFIO = source.Cooks.FirstOrDefault(e => e.Id == order.CookId)?.CookFIO,
+                CookFIO = order.Cook?.CookFIO,
                 Count = order.Count,
                 Status = order.Status,
                 Sum = order.Sum,
