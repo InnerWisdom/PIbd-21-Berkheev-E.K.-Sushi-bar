@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
+﻿using SushiBarBusinessLogic.Attributes;
 
 namespace SushiBarBusinessLogic.ViewModels
 {
     public class IngredientViewModel
     {
+        [Column(title: "Number", width: 100)]
         public int Id { get; set; }
 
-        [DisplayName("Название ингредиента")]
+        [Column(title: "Ingredient name", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string IngredientName { get; set; }
     }
 

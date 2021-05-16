@@ -35,8 +35,7 @@ namespace SushiBarView
         {
             try
             {
-                dataGridView.DataSource = logic.Read(null);
-                dataGridView.Columns["Id"].Visible = false;
+                Program.ConfigGrid(logic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
