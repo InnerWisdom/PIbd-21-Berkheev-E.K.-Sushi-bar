@@ -102,7 +102,7 @@ namespace SushiBarView
             this.Controls.Add(this.ButtonAdd);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormKitchens";
-            this.Text = "FormKitchens";
+            this.Text = "Кухни";
             this.Load += new System.EventHandler(this.FormKitchens_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
