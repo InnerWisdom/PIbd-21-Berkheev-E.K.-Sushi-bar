@@ -121,7 +121,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
             }
             if (order.Status != OrderStatus.Выполняется)
             {
-                throw new Exception("Заказ не в статусе \"Выполняется\"");
+                return;
             }
             _orderStorage.Update(new OrderBindingModel
             {
@@ -169,7 +169,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
                 Count = order.Count,
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
+                DateImplement = DateTime.Now,
                 Status = OrderStatus.Оплачен
             });
             MailLogic.MailSendAsync(new MailSendInfo

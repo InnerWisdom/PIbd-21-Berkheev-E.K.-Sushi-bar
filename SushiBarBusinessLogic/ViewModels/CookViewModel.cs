@@ -1,15 +1,16 @@
-﻿using System.ComponentModel;
+﻿using SushiBarBusinessLogic.Attributes;
 
 namespace SushiBarBusinessLogic.ViewModels
 {
     public class CookViewModel
     {
+        [Column(title: "Number", width: 100)]
         public int Id { get; set; }
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "Implementer FIO", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string CookFIO { get; set; }
-        [DisplayName("Время на заказ")]
+        [Column(title: "Time to work", width: 100)]
         public int WorkingTime { get; set; }
-        [DisplayName("Время на перерыв")]
+        [Column(title: "Time to pause", width: 100)]
         public int PauseTime { get; set; }
     }
 }

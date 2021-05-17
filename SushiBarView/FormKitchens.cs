@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SushiBarBusinessLogic.ViewModels;
 using System.Windows.Forms;
 
+using System.Reflection;
 using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
 using Unity;
@@ -83,19 +78,15 @@ namespace SushiBarView
         {
             try
             {
-                var list = kitchenLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGridView.Columns[4].Visible = false;
-                }
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo generic = method.MakeGenericMethod(typeof(KitchenViewModel));
+                generic.Invoke(this, new object[] { kitchenLogic.Read(null), dataGridView });
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

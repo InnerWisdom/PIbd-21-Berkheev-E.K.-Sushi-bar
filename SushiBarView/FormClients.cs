@@ -1,13 +1,8 @@
 ﻿using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SushiBarBusinessLogic.ViewModels;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -35,8 +30,9 @@ namespace SushiBarView
         {
             try
             {
-                dataGridView.DataSource = logic.Read(null);
-                dataGridView.Columns["Id"].Visible = false;
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo generic = method.MakeGenericMethod(typeof(ClientViewModel));
+                generic.Invoke(this, new object[] { logic.Read(null), dataGridView });
             }
             catch (Exception ex)
             {

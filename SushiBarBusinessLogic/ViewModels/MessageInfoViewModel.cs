@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using SushiBarBusinessLogic.Attributes;
 using System.Runtime.Serialization;
 
 namespace SushiBarBusinessLogic.ViewModels
@@ -8,22 +8,23 @@ namespace SushiBarBusinessLogic.ViewModels
     public class MessageInfoViewModel
     {
         [DataMember]
+        [Column(visible: false)]
         public string MessageId { get; set; }
 
-        [DisplayName("Отправитель")]
         [DataMember]
+        [Column(title: "Sender", width: 100)]
         public string SenderName { get; set; }
 
-        [DisplayName("Дата письма")]
         [DataMember]
+        [Column(title: "Delivery date", width: 100)]
         public DateTime DateDelivery { get; set; }
 
-        [DisplayName("Заголовок")]
+        [Column(title: "Subject", width: 100)]
         [DataMember]
         public string Subject { get; set; }
 
-        [DisplayName("Текст")]
         [DataMember]
+        [Column(title: "Text", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string Body { get; set; }
     }
 }

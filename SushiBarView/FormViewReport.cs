@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using Microsoft.Reporting.WinForms;
 using Unity;
+using System.Reflection;
 
 namespace SushiBarView
 {
@@ -63,12 +64,13 @@ namespace SushiBarView
 				{
 					try
 					{
-						logic.SaveOrdersToPdfFile(new ReportBindingModel
-						{
-							FileName = dialog.FileName,
+						MethodInfo method = logic.GetType().GetMethod("SaveOrdersToPdfFile");
+                        			method.Invoke(logic, new object[] { new ReportBindingModel
+                        			{
+                            				FileName = dialog.FileName,
 							DateFrom = dateTimePickerFrom.Value,
 							DateTo = dateTimePickerTo.Value
-						});
+                        			}});
 						MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
 					}

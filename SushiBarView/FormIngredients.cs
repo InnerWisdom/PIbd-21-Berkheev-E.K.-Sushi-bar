@@ -1,6 +1,8 @@
 ﻿using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
+using SushiBarBusinessLogic.ViewModels;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 
@@ -24,14 +26,9 @@ namespace SushiBarView
         {
             try
             {
-                var list = logic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode =
-                    DataGridViewAutoSizeColumnMode.Fill;
-                }
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo ing = method.MakeGenericMethod(typeof(IngredientViewModel));
+                ing.Invoke(this, new object[] { logic.Read(null), dataGridView });
             }
             catch (Exception ex)
             {

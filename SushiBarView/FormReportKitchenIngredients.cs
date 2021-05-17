@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
 using Unity;
+using System.Reflection;
 
 namespace SushiBarView
 {
@@ -27,10 +28,11 @@ namespace SushiBarView
                 {
                     try
                     {
-                        logic.SaveKitchenIngredientToExcelFile(new ReportBindingModel
+                        MethodInfo method = logic.GetType().GetMethod("SaveKitchenIngredientToExcelFile");
+                        method.Invoke(logic, new object[] { new ReportBindingModel
                         {
                             FileName = dialog.FileName
-                        });
+                        }});
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)

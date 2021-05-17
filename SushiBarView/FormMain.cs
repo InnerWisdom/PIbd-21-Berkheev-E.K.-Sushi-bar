@@ -1,6 +1,8 @@
 ﻿using SushiBarBusinessLogic.BindingModels;
 using SushiBarBusinessLogic.BusinessLogics;
+using SushiBarBusinessLogic.ViewModels;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using Unity;
 namespace SushiBarView
@@ -11,11 +13,14 @@ namespace SushiBarView
         public new IUnityContainer Container { get; set; }
         private readonly OrderLogic _orderLogic;
         private readonly ReportLogic _report;
-        public FormMain(OrderLogic orderLogic, ReportLogic report)
+        private readonly BackUpAbstractLogic _backUpAbstractLogic;
+        public FormMain(OrderLogic orderLogic, ReportLogic report,
+            BackUpAbstractLogic _backUpAbstractLogic)
         {
             InitializeComponent();
             this._orderLogic = orderLogic;
             this._report = report;
+            this._backUpAbstractLogic = _backUpAbstractLogic;
         }
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -25,19 +30,10 @@ namespace SushiBarView
         {
             try
             {
+                var method = typeof(Program).GetMethod("ConfigGrid");
+                MethodInfo generic = method.MakeGenericMethod(typeof(OrderViewModel));
+                generic.Invoke(this, new object[] { _orderLogic.Read(null), DataGridView });
 
-                var list = _orderLogic.Read(null);
-                if (list!=null)
-                {
-
-                    DataGridView.DataSource = list;
-                    DataGridView.Columns[0].Visible = false;
-
-                    DataGridView.Columns[1].Visible = false;
-                    DataGridView.Columns[2].Visible = false;
-                    DataGridView.Columns[3].Visible = false;
-
-                }
             }
             catch (Exception ex)
             {
@@ -178,6 +174,28 @@ namespace SushiBarView
         {
             var form = Container.Resolve<FormMessages>();
             form.ShowDialog();
+        }
+
+        private void createBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_backUpAbstractLogic != null)
+                {
+                    var fbd = new FolderBrowserDialog();
+                    if (fbd.ShowDialog() == DialogResult.OK)
+                    {
+                        _backUpAbstractLogic.CreateArchive(fbd.SelectedPath);
+                        MessageBox.Show("Backup created", "Message",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+            }
         }
     }
 }
