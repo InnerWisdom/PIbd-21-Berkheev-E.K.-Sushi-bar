@@ -113,12 +113,12 @@ namespace SushiBarListImplement.Implements
         }
         private OrderViewModel CreateModel(Order order)
         {
-            string printedName = "";
+            string sushiName = "";
             for (int i = 0; i < source.Sushis.Count; ++i)
             {
                 if (source.Sushis[i].Id == order.SushiId)
                 {
-                    printedName = source.Sushis[i].SushiName;
+                    sushiName = source.Sushis[i].SushiName;
                 }
             }
             string clientFIO = "";
@@ -140,7 +140,7 @@ namespace SushiBarListImplement.Implements
             return new OrderViewModel
             {
                 Id = order.Id,
-                SushiName = printedName,
+                SushiName = sushiName,
                 SushiId = order.SushiId,
                 ClientId = order.ClientId,
                 ClientFIO = clientFIO,

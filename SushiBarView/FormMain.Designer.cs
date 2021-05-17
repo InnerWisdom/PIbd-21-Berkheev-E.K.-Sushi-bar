@@ -35,6 +35,7 @@
             this.ИзделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.повараToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.письмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButtonReports = new System.Windows.Forms.ToolStripDropDownButton();
             this.списокКомпонентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.компонентыПоИзделиямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,7 +45,7 @@
             this.ButtonCreateOrder = new System.Windows.Forms.Button();
             this.ButtonPayOrder = new System.Windows.Forms.Button();
             this.ButtonRef = new System.Windows.Forms.Button();
-            this.письмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createBackupToolStripMenuItem = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -54,7 +55,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton,
             this.toolStripDropDownButtonReports,
-            this.toolStripButtonStartWork});
+            this.toolStripButtonStartWork,
+            this.createBackupToolStripMenuItem});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(915, 25);
@@ -103,6 +105,13 @@
             this.повараToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.повараToolStripMenuItem.Text = "Повара";
             this.повараToolStripMenuItem.Click += new System.EventHandler(this.исполнителиToolStripMenuItem_Click);
+            // 
+            // письмаToolStripMenuItem
+            // 
+            this.письмаToolStripMenuItem.Name = "письмаToolStripMenuItem";
+            this.письмаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.письмаToolStripMenuItem.Text = "Письма";
+            this.письмаToolStripMenuItem.Click += new System.EventHandler(this.письмаToolStripMenuItem_Click);
             // 
             // toolStripDropDownButtonReports
             // 
@@ -189,12 +198,15 @@
             this.ButtonRef.UseVisualStyleBackColor = true;
             this.ButtonRef.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
-            // письмаToolStripMenuItem
+            // createBackupToolStripMenuItem
             // 
-            this.письмаToolStripMenuItem.Name = "письмаToolStripMenuItem";
-            this.письмаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.письмаToolStripMenuItem.Text = "Письма";
-            this.письмаToolStripMenuItem.Click += new System.EventHandler(this.письмаToolStripMenuItem_Click);
+            this.createBackupToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.createBackupToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createBackupToolStripMenuItem.Image")));
+            this.createBackupToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.createBackupToolStripMenuItem.Name = "createBackupToolStripMenuItem";
+            this.createBackupToolStripMenuItem.Size = new System.Drawing.Size(43, 22);
+            this.createBackupToolStripMenuItem.Text = "Бэкап";
+            this.createBackupToolStripMenuItem.Click += new System.EventHandler(this.createBackupToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -235,5 +247,6 @@
         private System.Windows.Forms.ToolStripMenuItem повараToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonStartWork;
         private System.Windows.Forms.ToolStripMenuItem письмаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton createBackupToolStripMenuItem;
     }
 }

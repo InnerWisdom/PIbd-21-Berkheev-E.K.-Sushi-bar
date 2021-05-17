@@ -1,6 +1,6 @@
 ﻿using SushiBarBusinessLogic.Enums;
 using System;
-using System.ComponentModel;
+using SushiBarBusinessLogic.Attributes;
 
 using System.Runtime.Serialization;
 
@@ -10,6 +10,7 @@ namespace SushiBarBusinessLogic.ViewModels
     public class OrderViewModel
     {
         [DataMember]
+        [Column(title: "Number", gridViewAutoSize: GridViewAutoSize.Fill)]
         public int Id { get; set; }
         [DataMember]
         public int? CookId { get; set; }
@@ -18,28 +19,28 @@ namespace SushiBarBusinessLogic.ViewModels
         [DataMember]
         public int SushiId { get; set; }
         [DataMember]
-        [DisplayName("Worker")]
+        [Column(title: "Cook", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string CookFIO { get; set; }
         [DataMember]
-        [DisplayName("Client")]
+        [Column(title: "Client", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ClientFIO { get; set; }
         [DataMember]
-        [DisplayName("Изделие")]
+        [Column(title: "Sushi", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string SushiName { get; set; }
         [DataMember]
-        [DisplayName("Количество")]
+        [Column(title: "Quantity", gridViewAutoSize: GridViewAutoSize.Fill)]
         public int Count { get; set; }
         [DataMember]
-        [DisplayName("Сумма")]
+        [Column(title: "Sum", gridViewAutoSize: GridViewAutoSize.Fill)]
         public decimal Sum { get; set; }
         [DataMember]
-        [DisplayName("Статус")]
+        [Column(title: "Status", gridViewAutoSize: GridViewAutoSize.Fill)]
         public OrderStatus Status { get; set; }
         [DataMember]
-        [DisplayName("Дата создания")]
+        [Column(title: "Creation date", gridViewAutoSize: GridViewAutoSize.Fill)]
         public DateTime DateCreate { get; set; }
         [DataMember]
-        [DisplayName("Дата выполнения")]
+        [Column(title: "Implementatation date", gridViewAutoSize: GridViewAutoSize.Fill)]
         public DateTime? DateImplement { get; set; }
     }
 }
