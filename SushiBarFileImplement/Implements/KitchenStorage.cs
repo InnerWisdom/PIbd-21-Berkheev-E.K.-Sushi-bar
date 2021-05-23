@@ -136,50 +136,47 @@ namespace SushiBarFileImplement.Implements
             }
         }
 
-        public void CheckAndWriteOff(SushiViewModel model, int printedProductCountInOrder)
+
+        public bool CheckIngredientsCount(int orderID)
         {
-            foreach (var ingredientInSushi in model.SushiIngredients)
+            foreach (var ingredient in source.Sushis.FirstOrDefault(rec => rec.Id == source.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).SushiIngredients)
             {
-                int ingredientCount = source.Kitchens
-                        .Sum(kitchen => kitchen.KitchenIngredients
-                        .FirstOrDefault(ingredient => ingredient.Key == ingredientInSushi.Key).Value);
-
-                if (ingredientCount < ingredientInSushi.Value.Item2 * printedProductCountInOrder)
+                int count = ingredient.Value * source.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+                foreach (Kitchen kitchen in source.Kitchens)
                 {
-                    throw new Exception("Не хватает ингредиентов для суши!");
+                    if (kitchen.KitchenIngredients.ContainsKey(ingredient.Key))
+                    {
+                        count -= kitchen.KitchenIngredients[ingredient.Key];
+                    }
+                }
+                if (count > 0)
+                {
+                    return false;
                 }
             }
 
-            foreach (var ingredientInSushi in model.SushiIngredients)
+            foreach (var ingredient in source.Sushis.FirstOrDefault(rec => rec.Id == source.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).SushiIngredients)
             {
-                int ingredientCountInSushi = ingredientInSushi.Value.Item2 * printedProductCountInOrder;
-
-                List<Kitchen> certainKitchens = source.Kitchens
-                    .Where(kitchen => kitchen.KitchenIngredients
-                    .ContainsKey(ingredientInSushi.Key))
-                    .ToList();
-
-                foreach (var storehouse in certainKitchens)
+                int count = ingredient.Value * source.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+                foreach (Kitchen kitchen in source.Kitchens)
                 {
-                    int ingredientCountInKitchen = storehouse.KitchenIngredients[ingredientInSushi.Key];
-
-                    if (ingredientCountInKitchen <= ingredientCountInSushi)
+                    if (kitchen.KitchenIngredients.ContainsKey(ingredient.Key))
                     {
-                        ingredientCountInSushi -= ingredientCountInKitchen;
-                        storehouse.KitchenIngredients.Remove(ingredientInSushi.Key);
-                    }
-                    else
-                    {
-                        storehouse.KitchenIngredients[ingredientInSushi.Key] -= ingredientCountInSushi;
-                        ingredientCountInSushi = 0;
-                    }
-
-                    if (ingredientCountInSushi == 0)
-                    {
-                        break;
+                        if (kitchen.KitchenIngredients[ingredient.Key] > count)
+                        {
+                            kitchen.KitchenIngredients[ingredient.Key] -= count;
+                            break;
+                        }
+                        else
+                        {
+                            count -= kitchen.KitchenIngredients[ingredient.Key];
+                            kitchen.KitchenIngredients[ingredient.Key] = 0;
+                        }
                     }
                 }
             }
+            return true;
         }
+
     }
 }

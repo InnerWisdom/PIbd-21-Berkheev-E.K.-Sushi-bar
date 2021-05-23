@@ -174,7 +174,7 @@ namespace SushiBarListImplement.Implements
                 }
             }
         }
-        public void CheckAndWriteOff(SushiViewModel model, int sushiCountInOrder)
+        public bool CheckIngredientsCount(int orderID)
         {
             throw new NotImplementedException();
         }

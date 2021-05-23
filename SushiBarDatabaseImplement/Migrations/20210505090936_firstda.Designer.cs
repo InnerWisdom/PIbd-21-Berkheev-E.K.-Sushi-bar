@@ -10,8 +10,8 @@ using SushiBarDatabaseImplement;
 namespace SushiBarDatabaseImplement.Migrations
 {
     [DbContext(typeof(SushiBarDatabase))]
-    [Migration("20210502145440_first")]
-    partial class first
+    [Migration("20210505090936_firstda")]
+    partial class firstda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,27 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.Cook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CookFIO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PauseTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkingTime")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cooks");
                 });
 
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Ingredient", b =>
@@ -119,6 +140,9 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CookId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -140,6 +164,8 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("CookId");
 
                     b.HasIndex("SushiId");
 
@@ -212,6 +238,10 @@ namespace SushiBarDatabaseImplement.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SushiBarDatabaseImplement.Models.Cook", "Cook")
+                        .WithMany("Order")
+                        .HasForeignKey("CookId");
 
                     b.HasOne("SushiBarDatabaseImplement.Models.Sushi", "Sushi")
                         .WithMany("Orders")

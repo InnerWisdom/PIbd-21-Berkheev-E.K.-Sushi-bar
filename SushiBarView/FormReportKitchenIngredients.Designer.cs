@@ -60,7 +60,7 @@ namespace SushiBarView
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.ButtonSaveToExcel);
             this.Name = "FormReportKitchenIngredients";
-            this.Text = "FormReportKitchenIngredients";
+            this.Text = "Отчет по ингредиентам на кухне";
             this.Load += new System.EventHandler(this.FormReportKitchenIngredients_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

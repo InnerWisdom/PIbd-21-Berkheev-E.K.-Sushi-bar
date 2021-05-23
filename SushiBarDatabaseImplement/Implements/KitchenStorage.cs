@@ -87,56 +87,7 @@ namespace SushiBarDatabaseImplement.Implements
                     null;
             }
         }
-        public void CheckAndWriteOff(SushiViewModel model, int sushiCountInOrder)
-        {
-            using (var context = new SushiBarDatabase())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
 
-                    foreach (var ingredientInSushi in model.SushiIngredients)
-                    {
-                        int ingredientCountInSushi = ingredientInSushi.Value.Item2 * sushiCountInOrder;
-
-                        List<KitchenIngredient> certainIngredients = context.KitchenIngredients
-                            .Where(kitchen => kitchen.IngredientId == ingredientInSushi.Key)
-                            .ToList();
-
-                        foreach (var ingredient in certainIngredients)
-                        {
-                            int ingredientCountInKitchen = ingredient.Count;
-
-                            if (ingredientCountInKitchen <= ingredientCountInSushi)
-                            {
-                                ingredientCountInSushi -= ingredientCountInKitchen;
-                                context.Kitchens.FirstOrDefault(rec => rec.Id == ingredient.KitchenId).KitchenIngredients.Remove(ingredient);
-                            }
-                            else
-                            {
-                                ingredient.Count -= ingredientCountInSushi;
-                                ingredientCountInSushi = 0;
-                            }
-
-                            if (ingredientCountInSushi == 0)
-                            {
-                                break;
-                            }
-                        }
-
-                        if (ingredientCountInSushi > 0)
-                        {
-                            transaction.Rollback();
-
-                            throw new Exception("Не хватает ингредиентов для суши!");
-                        }
-                    }
-
-                    context.SaveChanges();
-
-                    transaction.Commit();
-                }
-            }
-        }
         public void Insert(KitchenBindingModel model)
         {
             using (var context = new SushiBarDatabase())
@@ -258,6 +209,54 @@ namespace SushiBarDatabaseImplement.Implements
             }
 
             return kitchen;
+        }
+
+        public bool CheckIngredientsCount(int orderID)
+        {
+            using (var context = new SushiBarDatabase())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var SushiId = context.Sushis.FirstOrDefault(rec => rec.Id == context.Orders.FirstOrDefault(order => order.Id == orderID).SushiId).Id;
+                        var countOrders = context.Orders.FirstOrDefault(rec => rec.Id == orderID).Count;
+
+                        foreach (var component in context.SushiIngredients.Where(rec => rec.SushiId == SushiId))
+                        {
+                            int countIngredients = component.Count * countOrders;
+
+                            foreach (var kitchenIngredient in context.KitchenIngredients.Where(rec => rec.IngredientId == component.IngredientId))
+                            {
+                                if (kitchenIngredient.Count > countIngredients)
+                                {
+                                    kitchenIngredient.Count -= countIngredients;
+                                    countIngredients = 0;
+                                    break;
+                                }
+                                else
+                                {
+                                    countIngredients -= kitchenIngredient.Count;
+                                    kitchenIngredient.Count = 0;
+                                }
+                            }
+                            if (countIngredients > 0)
+                            {
+                                transaction.Rollback();
+                                return false;
+                            }
+                        }
+                        context.SaveChanges();
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("На складе нет необходимых компонентов");
+                    }
+                }
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SushiBarDatabaseImplement.Migrations
 {
-    public partial class first : Migration
+    public partial class firstda : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,21 @@ namespace SushiBarDatabaseImplement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cooks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CookFIO = table.Column<string>(nullable: true),
+                    WorkingTime = table.Column<int>(nullable: false),
+                    PauseTime = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cooks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,6 +113,7 @@ namespace SushiBarDatabaseImplement.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SushiId = table.Column<int>(nullable: false),
+                    CookId = table.Column<int>(nullable: true),
                     ClientId = table.Column<int>(nullable: false),
                     Count = table.Column<int>(nullable: false),
                     Sum = table.Column<decimal>(nullable: false),
@@ -114,6 +130,12 @@ namespace SushiBarDatabaseImplement.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Orders_Cooks_CookId",
+                        column: x => x.CookId,
+                        principalTable: "Cooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Orders_Sushis_SushiId",
                         column: x => x.SushiId,
@@ -165,6 +187,11 @@ namespace SushiBarDatabaseImplement.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_CookId",
+                table: "Orders",
+                column: "CookId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_SushiId",
                 table: "Orders",
                 column: "SushiId");
@@ -196,6 +223,9 @@ namespace SushiBarDatabaseImplement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Cooks");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

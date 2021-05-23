@@ -12,9 +12,14 @@ namespace SushiBarBusinessLogic.ViewModels
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public int? CookId { get; set; }
+        [DataMember]
         public int ClientId { get; set; }
         [DataMember]
         public int SushiId { get; set; }
+        [DataMember]
+        [DisplayName("Worker")]
+        public string CookFIO { get; set; }
         [DataMember]
         [DisplayName("Client")]
         public string ClientFIO { get; set; }

@@ -201,6 +201,18 @@
     <Compile Include="FormClients.Designer.cs">
       <DependentUpon>FormClients.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCook.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCook.Designer.cs">
+      <DependentUpon>FormCook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCooks.Designer.cs">
+      <DependentUpon>FormCooks.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormIngredient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormClients.resx">
       <DependentUpon>FormClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCook.resx">
+      <DependentUpon>FormCook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCooks.resx">
+      <DependentUpon>FormCooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormIngredient.resx">
       <DependentUpon>FormIngredient.cs</DependentUpon>

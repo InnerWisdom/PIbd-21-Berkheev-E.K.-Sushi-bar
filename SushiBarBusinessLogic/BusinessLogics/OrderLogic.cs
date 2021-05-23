@@ -15,6 +15,7 @@ namespace SushiBarBusinessLogic.BusinessLogics
 
         private readonly IKitchenStorage _kitchenStorage;
 
+        private readonly object locker = new object();
         public OrderLogic(IOrderStorage orderStorage, ISushiStorage sushiStorage,
             IKitchenStorage kitchenStorage)
         {
@@ -48,36 +49,46 @@ namespace SushiBarBusinessLogic.BusinessLogics
         }
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = _orderStorage.GetElement(new OrderBindingModel
+            lock (locker)
             {
-                Id =
-           model.OrderId
-            });
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
-            }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
 
-            var sushi = _sushiStorage.GetElement(new SushiBindingModel
-            {
-                Id = order.SushiId
-            });
+                OrderStatus status = OrderStatus.Выполняется;
+                var order = _orderStorage.GetElement(new OrderBindingModel
+                {
+                    Id = model.OrderId
+                });
+                if (order == null)
+                {
+                    throw new Exception("Заказ не найден");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"принят\"");
+                }
+                if (!_kitchenStorage.CheckIngredientsCount(model.OrderId))
+                {
+                    status = OrderStatus.НужныИнгредиенты;
+                }
+                if (order.CookId.HasValue)
+                {
+                    throw new Exception("Order already has implementer");
+                }
+                _orderStorage.Update(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    ClientId = order.ClientId,
+                    CookId = model.CookId,
+                    SushiId = order.SushiId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = status
+                });
 
-            _kitchenStorage.CheckAndWriteOff(sushi, order.Count);
-            _orderStorage.Update(new OrderBindingModel
-            {
-                Id = order.Id,
-                SushiId = order.SushiId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
-                Status = OrderStatus.Выполняется
-            }); ;
+         
+            }
+                
         }
         public void FinishOrder(ChangeStatusBindingModel model)
         {
@@ -90,6 +101,10 @@ namespace SushiBarBusinessLogic.BusinessLogics
             {
                 throw new Exception("Не найден заказ");
             }
+            if (order.Status == OrderStatus.НужныИнгредиенты && _kitchenStorage.CheckIngredientsCount(model.OrderId))
+            {
+                order.Status = OrderStatus.Выполняется;
+            }
             if (order.Status != OrderStatus.Выполняется)
             {
                 throw new Exception("Заказ не в статусе \"Выполняется\"");
@@ -97,6 +112,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                CookId = order.CookId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -126,6 +143,8 @@ namespace SushiBarBusinessLogic.BusinessLogics
             _orderStorage.Update(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
+                CookId=order.CookId,
                 SushiId = order.SushiId,
                 Count = order.Count,
                 Sum = order.Sum,

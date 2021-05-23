@@ -33,6 +33,8 @@ namespace SushiBarFileImplement
         public List<Kitchen> Kitchens { get; set; }
 
         public List<Client> Clients { get; set; }
+
+        public List<Cook> Cooks { get; set; }
         private FileDataListSingleton()
         {
             Ingredients = LoadIngredients();
@@ -40,6 +42,7 @@ namespace SushiBarFileImplement
             Sushis = LoadSushis();
             Kitchens = LoadKitchens();
             Clients = LoadClients();
+            Cooks = new List<Cook>();
         }
 
         public static FileDataListSingleton GetInstance()

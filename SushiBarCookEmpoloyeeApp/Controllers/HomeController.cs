@@ -132,7 +132,7 @@ namespace SushiBarCookEmployeeApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddIngredientsToKitchen()
+        public IActionResult Refill()
         {
             if (Program.Enter == null)
             {
@@ -144,7 +144,7 @@ namespace SushiBarCookEmployeeApp.Controllers
         }
 
         [HttpPost]
-        public void AddIngredientsToKitchen(int kitchenId, int ingredientId, int count)
+        public void Refill(int kitchenId, int ingredientId, int count)
         {
             ApiCookEmployee.PostRequest("api/kitchen/Refill", new KitchenFillBindingModel
             {
@@ -152,7 +152,7 @@ namespace SushiBarCookEmployeeApp.Controllers
                 IngredientId = ingredientId,
                 Count = count
             });
-            Response.Redirect("AddIngredientsToKitchen");
+            Response.Redirect("Refill");
         }
     }
 }
