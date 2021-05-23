@@ -47,6 +47,7 @@
             this.списокЗаказовПоДнямToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.повараToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonStartWork = new System.Windows.Forms.ToolStripButton();
+            this.письмаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridView)).BeginInit();
             this.SuspendLayout();
@@ -72,7 +73,8 @@
             this.ИзделияToolStripMenuItem,
             this.кухниToolStripMenuItem,
             this.клиентыToolStripMenuItem,
-            this.повараToolStripMenuItem});
+            this.повараToolStripMenuItem,
+            this.письмаToolStripMenuItem});
             this.toolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton.Image")));
             this.toolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton.Name = "toolStripDropDownButton";
@@ -106,6 +108,13 @@
             this.клиентыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.клиентыToolStripMenuItem.Text = "Клиенты";
             this.клиентыToolStripMenuItem.Click += new System.EventHandler(this.клиентыToolStripMenuItem_Click);
+            // 
+            // повараToolStripMenuItem
+            // 
+            this.повараToolStripMenuItem.Name = "повараToolStripMenuItem";
+            this.повараToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.повараToolStripMenuItem.Text = "Повара";
+            this.повараToolStripMenuItem.Click += new System.EventHandler(this.исполнителиToolStripMenuItem_Click);
             // 
             // toolStripDropDownButtonReports
             // 
@@ -143,6 +152,16 @@
             this.списокЗаказовToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
             this.списокЗаказовToolStripMenuItem.Text = "Список заказов";
             this.списокЗаказовToolStripMenuItem.Click += new System.EventHandler(this.списокЗаказовToolStripMenuItem_Click);
+            // 
+            // toolStripButtonStartWork
+            // 
+            this.toolStripButtonStartWork.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonStartWork.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonStartWork.Image")));
+            this.toolStripButtonStartWork.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStartWork.Name = "toolStripButtonStartWork";
+            this.toolStripButtonStartWork.Size = new System.Drawing.Size(84, 22);
+            this.toolStripButtonStartWork.Text = "Запуск работ";
+            this.toolStripButtonStartWork.Click += new System.EventHandler(this.toolStripButtonStartWork_Click);
             // 
             // DataGridView
             // 
@@ -219,7 +238,12 @@
             this.ингредиентыПоСкладамToolStripMenuItem.Click += new System.EventHandler(this.ингредиентыПоСкладамToolStripMenuItem_Click);
             // 
             // списокЗаказовПоДнямToolStripMenuItem
+            // письмаToolStripMenuItem
             // 
+            this.письмаToolStripMenuItem.Name = "письмаToolStripMenuItem";
+            this.письмаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.письмаToolStripMenuItem.Text = "Письма";
+            this.письмаToolStripMenuItem.Click += new System.EventHandler(this.письмаToolStripMenuItem_Click);
             this.повараToolStripMenuItem.Name = "повараToolStripMenuItem";
             this.повараToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.повараToolStripMenuItem.Text = "Повара";
@@ -280,5 +304,6 @@
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повараToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButtonStartWork;
+        private System.Windows.Forms.ToolStripMenuItem письмаToolStripMenuItem;
     }
 }

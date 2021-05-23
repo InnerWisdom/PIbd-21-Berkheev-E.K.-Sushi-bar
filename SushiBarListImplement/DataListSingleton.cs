@@ -21,6 +21,7 @@ namespace SushiBarListImplement
 
         public List<Cook> Cooks { get; set; }
 
+        public List<MessageInfo> Messages { get; set; }
         private DataListSingleton()
         {
             Ingredients = new List<Ingredient>();
@@ -29,6 +30,7 @@ namespace SushiBarListImplement
             Kitchens = new List<Kitchen>();
             Clients = new List<Client>();
             Cooks = new List<Cook>();
+            Messages = new List<MessageInfo>();
         }
         
         public static DataListSingleton GetInstance()

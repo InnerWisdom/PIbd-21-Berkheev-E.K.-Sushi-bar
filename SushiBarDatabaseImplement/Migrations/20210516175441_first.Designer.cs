@@ -10,8 +10,8 @@ using SushiBarDatabaseImplement;
 namespace SushiBarDatabaseImplement.Migrations
 {
     [DbContext(typeof(SushiBarDatabase))]
-    [Migration("20210505090936_firstda")]
-    partial class firstda
+    [Migration("20210516175441_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -130,6 +130,33 @@ namespace SushiBarDatabaseImplement.Migrations
                     b.ToTable("KitchenIngredients");
                 });
 
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.Property<string>("MessageId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDelivery")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -229,6 +256,13 @@ namespace SushiBarDatabaseImplement.Migrations
                         .HasForeignKey("KitchenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("SushiBarDatabaseImplement.Models.MessageInfo", b =>
+                {
+                    b.HasOne("SushiBarDatabaseImplement.Models.Client", "Client")
+                        .WithMany("Messages")
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("SushiBarDatabaseImplement.Models.Order", b =>
